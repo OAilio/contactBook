@@ -8,8 +8,11 @@ module.exports = {
 	'overrides': [
 	],
 	'parserOptions': {
-		'ecmaVersion': 'latest'
+		'ecmaVersion': 'latest',
+		'sourceType': 'module'
 	},
+	'parser': '@babel/eslint-parser',
+
 	'rules': {
 		'indent': [
 			'error',
