@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "dev": "nodemon index.js",
+    "start": "node backend/index.js",
+    "dev": "nodemon backend/index.js",
     "lint": "eslint .",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build:ui": "rm -rf build && cd C:/Users/okkoi/FullStackOpen/fsopen/osa2/puhelinluettelo && npm run build && cp -r build C:/Users/okkoi/FullStackOpen/fsoPart3",
@@ -13,14 +13,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/OAilio/fsoPart3.git"
+    "url": "git+https://github.com/OAilio/contactBook.git"
   },
   "author": "Okko Ailio",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/OAilio/fsoPart3/issues"
+    "url": "https://github.com/OAilio/contactBook/issues"
   },
-  "homepage": "https://github.com/OAilio/fsoPart3#readme",
+  "homepage": "https://github.com/OAilio/contactBook#readme",
   "devDependencies": {
     "eslint": "^8.38.0",
     "nodemon": "^2.0.21"
