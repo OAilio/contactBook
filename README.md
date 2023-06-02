@@ -1,2 +1,0 @@
-# contactBook
-School project
