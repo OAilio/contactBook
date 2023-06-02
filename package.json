@@ -1,0 +1,36 @@
+{
+  "name": "puhelinluettelo_backend",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "lint": "eslint .",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build:ui": "rm -rf build && cd C:/Users/okkoi/FullStackOpen/fsopen/osa2/puhelinluettelo && npm run build && cp -r build C:/Users/okkoi/FullStackOpen/fsoPart3",
+    "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && git push"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/OAilio/fsoPart3.git"
+  },
+  "author": "Okko Ailio",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/OAilio/fsoPart3/issues"
+  },
+  "homepage": "https://github.com/OAilio/fsoPart3#readme",
+  "devDependencies": {
+    "eslint": "^8.38.0",
+    "nodemon": "^2.0.21"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "mongodb": "^5.2.0",
+    "mongoose": "^7.0.3",
+    "morgan": "^1.10.0"
+  }
+}
