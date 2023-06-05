@@ -43,7 +43,7 @@ console.log('render', contacts.length, 'persons')
     <div>
       {contacts.map(contact => (
         <p key={contact.id}>
-          {contact.name} {contact.number} {''}
+          {contact.name} {contact.number} {contact.email} {''}
           <button onClick={() => handleDelete(contact.id)}>delete</button>
         </p>
       ))}
@@ -51,7 +51,7 @@ console.log('render', contacts.length, 'persons')
   )
 }
 
-const FormAddNewContact = ({addContact, newName, handleNameChange, newNumber, handleNumberChange}) => {
+const FormAddNewContact = ({addContact, newName, handleNameChange, newNumber, handleNumberChange, newEmail, handleEmailChange}) => {
   return (
     <form onSubmit={addContact}>
         <div>
@@ -61,6 +61,10 @@ const FormAddNewContact = ({addContact, newName, handleNameChange, newNumber, ha
         <div>
           Number: <input value={newNumber}
           onChange={handleNumberChange}/>
+        </div>
+        <div>
+          E-mail: <input value={newEmail}
+          onChange={handleEmailChange}/>
         </div>
         <div>
           <button type="submit"><b>add</b></button>
@@ -73,6 +77,7 @@ const App = () => {
   const [persons, setPersons] = useState([]) 
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
+  const [newEmail, setNewEmail] = useState('');
   const [searchInput, setSearchInput] = useState('')
   const [message, setMessage] = useState(null)
 
@@ -91,6 +96,7 @@ const App = () => {
     const personObject = {
       name: newName,
       number: newNumber,
+      email: newEmail,
       id: persons.length+1
     }
     if (persons.some(person => person.name === newName)){
@@ -98,6 +104,7 @@ const App = () => {
       alert(`Contact ${newName} already exists!`)
       setNewName('')
       setNewNumber('')
+      setNewEmail('')
       return
     } else {
       console.log(personObject)
@@ -107,6 +114,7 @@ const App = () => {
           setPersons(persons.concat(personObject))
           setNewName('')
           setNewNumber('')
+          setNewEmail('')
           setMessage(`${newName} was successfully added to the phonebook!`)
           setTimeout(() => {
             setMessage(null)
@@ -118,6 +126,7 @@ const App = () => {
         setMessage(error.response.data.error)
         setNewName('')
         setNewNumber('')
+        setNewEmail('')
         setTimeout(() => {
           setMessage(null)
         }, 5000)
@@ -137,6 +146,12 @@ const App = () => {
     setNewNumber(event.target.value)
   }
 
+  const handleEmailChange = (event) => {
+    event.preventDefault();
+    console.log(event.target.value);
+    setNewEmail(event.target.value);
+  };
+
   const handleSearchChange = (event) => {
     event.preventDefault()
     console.log(event.target.value)
@@ -151,7 +166,7 @@ const App = () => {
       <Notification message={message} />
       <SearchFilter handleSearchChange={handleSearchChange} searchInput={searchInput}/>
       <h2>Add New Contact</h2>
-      <FormAddNewContact addContact={addContact} newName={newName} handleNameChange={handleNameChange} newNumber={newNumber} handleNumberChange={handleNumberChange}/>
+      <FormAddNewContact addContact={addContact} newName={newName} handleNameChange={handleNameChange} newNumber={newNumber} handleNumberChange={handleNumberChange} handleEmailChange={handleEmailChange}/>
       <h2>Numbers</h2>
       <Persons contacts={filteredPersons} setPersons={setPersons} setMessage={setMessage}/>
     </div>

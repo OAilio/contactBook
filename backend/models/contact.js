@@ -24,7 +24,12 @@ const contactSchema = new mongoose.Schema({
 	number: {
 		type: String,
 		required: true
+	},
+	email: {
+		type: String,
+		required: false
 	}
+
 })
 
 contactSchema.set('toJSON', {

@@ -11,7 +11,7 @@ module.exports = {
 		'ecmaVersion': 'latest',
 		'sourceType': 'module'
 	},
-	'parser': '@babel/eslint-parser',
+
 
 	'rules': {
 		'indent': [

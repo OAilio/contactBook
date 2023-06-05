@@ -19,7 +19,8 @@ mongoose.connect(url)
 
 const contactSchema = new mongoose.Schema({
 	name: String,
-	number: String
+	number: String,
+	email: String
 })
 
 const Contact = mongoose.model('Contact', contactSchema)

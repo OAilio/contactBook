@@ -38,7 +38,8 @@ app.post('/api/persons', (req, res, next) => {
 
 	const contact = new Contact({
 		name: body.name,
-		number: body.number
+		number: body.number,
+		email: body.email
 	})
 
 	contact.save()
