@@ -8,6 +8,7 @@
     "frontend": "cd frontend && npm start",
     "dev": "nodemon backend/index.js",
     "lint": "eslint .",
+    "fixLint": "eslint --fix frontend",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build:ui": "rm -rf build && cd C:/Users/okkoi/FullStackOpen/fsopen/osa2/puhelinluettelo && npm run build && cp -r build C:/Users/okkoi/FullStackOpen/fsoPart3",
     "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && git push"

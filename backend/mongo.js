@@ -1,3 +1,4 @@
+//THIS FILE NEEDS MODIFICATIONS, AS OF NOW IT WONT WORK PROPERLY
 const mongoose = require('mongoose')
 
 if (process.argv.length<3) {
@@ -27,7 +28,8 @@ const Contact = mongoose.model('Contact', contactSchema)
 
 const contact = new Contact({
 	name: process.argv[3],
-	number: process.argv[4]
+	number: process.argv[4],
+	email: process.argv[5]
 })
 
 if (process.argv.length === 5){
