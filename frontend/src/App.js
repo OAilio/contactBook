@@ -147,7 +147,7 @@ const App = () => {
 
   return (
     <div>
-      <h1>Phonebook</h1>
+      <h1>CONTACT BOOK</h1>
       <Notification message={message} />
       <SearchFilter handleSearchChange={handleSearchChange} searchInput={searchInput}/>
       <h2>Add New Contact</h2>

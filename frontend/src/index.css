@@ -1,14 +1,18 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap");
+
 h1 {
-  color: rgb(2, 45, 235);
-  font-size: 50px;
-  font-family: "Lucida Console", "Courier New", monospace;
-  margin: 20px;
-  text-align: center;
-  text-decoration: underline;
+  color: rgb(47,77,82);
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
+  font-size: 96px;
+  font-family: "Nunito";
+  margin-left: 82px;
+  text-align: left;
+  font-weight: bold;
 }
 
 h2 {
   font-family: "Lucida Console", "Courier New", monospace;
+  color: rgb(47,77,82);
   margin: 20px;
 }
 
@@ -27,6 +31,6 @@ h2 {
   margin-right: 350px
 }
 
-/* body{
-  background-color: blue;
-} */
+body{
+  background: linear-gradient(to bottom, rgb(255, 247, 114) 0%, rgb(255, 247, 114) 20%, rgb(47,77,82));
+}
