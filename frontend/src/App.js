@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import phonebook from './comms/phonebook'
 import utils from './utils'
 
-const capitalizeName = utils.capitalizeName
+//const capitalizeName = utils.capitalizeName
 
 const Notification = ({ message }) => {
 	if (message === null) {
@@ -46,7 +46,7 @@ const Persons = ({ contacts, setPersons, setMessage }) => {
 		<div>
 			{contacts.map(contact => (
 				<p key={contact.id}>
-					{capitalizeName(contact.name)} {contact.number} {contact.email} {''}
+					{contact.name} {contact.number} {contact.email} {''}
 					<button onClick={() => handleDelete(contact.id)}>delete</button>
 				</p>
 			))}
@@ -56,22 +56,24 @@ const Persons = ({ contacts, setPersons, setMessage }) => {
 
 const FormAddNewContact = ({ addContact, newName, handleNameChange, newNumber, handleNumberChange, newEmail, handleEmailChange }) => {
 	return (
-		<form onSubmit={addContact}>
-			<div>
-          		Name: <input value={newName} onChange={handleNameChange}/>
-			</div>
-			<div>
-          		Number: <input value={newNumber} onChange={handleNumberChange}/>
-			</div>
-			<div>
-          		E-mail: <input value={newEmail} onChange={handleEmailChange}/>
-			</div>
-			<div>
-				<button type="submit"><b>add</b></button>
-			</div>
-		</form>
-	)
-}
+		<div className="form-container">
+			<form onSubmit={addContact} className="form-add-new-contact">
+				<div>
+					Name: <input value={newName} onChange={handleNameChange} />
+				</div>
+				<div>
+					Number: <input value={newNumber} onChange={handleNumberChange} />
+				</div>
+				<div>
+					E-mail: <input value={newEmail} onChange={handleEmailChange} />
+				</div>
+				<div>
+					<button type="submit"><b>add</b></button>
+				</div>
+			</form>
+		</div>
+	);
+};
 
 const App = () => {
 	const [persons, setPersons] = useState([])
@@ -167,7 +169,7 @@ const App = () => {
 			<Notification message={message} />
 			<SearchFilter handleSearchChange={handleSearchChange} searchInput={searchInput}/>
 			<h2>Add New Contact</h2>
-			<button onClick={() => setShowForm(!showForm)}>Add new contact</button>
+			<button onClick={() => setShowForm(!showForm)}>Toggle Form</button> {/* Button to toggle form display */}
 			{showForm && (
 				<FormAddNewContact
 					addContact={addContact}

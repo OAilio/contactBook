@@ -15,16 +15,11 @@ mongoose.connect(url)
 		console.log('error connecting to MongoDB:', error.message)
 	})
 
-const capitalizeName = (name) => {
-	return name.charAt(0).toUpperCase() + name.slice(1).toLowerCase()
-}
-
 const contactSchema = new mongoose.Schema({
 	name: {
 		type: String,
 		minlength: 3,
 		required: true,
-		set: capitalizeName
 	},
 	number: {
 		type: String,
