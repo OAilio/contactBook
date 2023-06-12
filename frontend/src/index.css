@@ -1,22 +1,39 @@
-@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap");
+@font-face {
+	font-family: 'Nunito Regular';
+	src: url('../../fonts/Nunito-VariableFont_wght.ttf') format('truetype');
+	font-weight: normal;
+  	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Nunito Bold';
+	src: url('../../fonts/Nunito-VariableFont_wght.ttf') format('truetype');
+	font-weight: 900;
+  	font-style: normal;
+}
 
 h1 {
+	font-family: "Nunito Bold";
 	color: rgb(47,77,82);
 	text-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
 	font-size: 96px;
-	font-family: "Nunito";
 	margin-left: 82px;
+	margin-bottom: 0px;
+	margin-top: 0px;
 	text-align: left;
-	font-weight: bold;
 }
 
 h2 {
-	font-family: "Lucida Console", "Courier New", monospace;
+	font-family: "Nunito Regular";
 	color: rgb(47,77,82);
-	margin: 20px;
+	margin-left: 47px;
+	margin-bottom: 0px;
+	margin-top: 0px;
+	text-align: left;
+	font-size: 64px;
 }
 
-.message {
+/* .message {
 	background: rgba(0, 38, 255, 0.39);
 	font-size: 20px;
 	font-family: "Lucida Console", "Courier New", monospace;
@@ -25,27 +42,138 @@ h2 {
 	border-color: rgb(2, 56, 235);
 	padding: 10px;
 	text-align: center;
-	margin-bottom: 10px;
-	margin-top: 10px;
+	margin-bottom: 0px;
+	margin-top: 0px;
 	margin-left: 350px;
 	margin-right: 350px
-}
+} */
 
-body{
-	background: linear-gradient(to bottom, rgb(255, 247, 114) 0%, rgb(255, 247, 114) 20%, rgb(47,77,82));
-}
+
+body {
+	margin: 10px;
+	padding: 0;
+	background-color: rgb(255, 247, 114);
+	overflow-y: scroll;
+  }
 
 .form-container {
-	position: fixed;
-	top: 50%;
+	position: absolute;
+	top: 100%;
 	left: 50%;
 	transform: translate(-50%, -50%);
 	background-color: #fff;
 	padding: 20px;
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+	z-index: 999;
+  }
+
+  .new-button{
+	background-color: rgb(47,77,82);
+	border: none;
+	padding-left: 20px;
+	padding-right: 20px;
+	color: rgb(255, 247, 114);
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 48px;
+	font-family: "Nunito Bold";
+	border-radius: 50%;
+	margin-right: 40px;
+  }
+
+  .bar {
+	display: inline-flex;
+	justify-content: center;
+	align-items: center;
+	background-color: rgb(92, 214, 194);
+	margin-left: 15%;
+	margin-right: 15%;
+	border-radius: 30px;
+	box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.25);
+  }
+
+  .bar-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+  }
+
+.search-bar{
+	margin-left: 180px;
+	margin-right: 17px;
+	border: none;
+	font-size: 30px;
+	border-radius: 30px;
+	padding-left: 30px;
+	padding-top: 16px;
+	padding-bottom: 8px;
+	box-shadow: inset 0px 2px 4px rgba(0, 0, 0, 0.25);
 }
+
+.search-bar::placeholder{
+	color: rgb(203, 210, 212); 
+}
+
 
 .form-add-new-contact {
 	width: 300px;
 	margin: 0 auto;
 }
+
+
+.container {
+	top: 284px;
+	left: 0;
+	width: 100%;
+	height: calc(100% - 284px);
+	z-index: 999;
+	overflow-y: auto;
+	background-color: transparent;
+  }
+  
+  .content {
+	position: relative;
+	z-index: 1;
+	text-align: center;
+	margin-bottom: 0;
+  	}
+  
+  .dimmed-background {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.5);
+	z-index: 998;
+  }
+
+  .contacts-scrollbar {
+	height: calc(100% - 284px); /* Adjust the height calculation based on your needs */
+  	overflow-y: auto;
+  }
+  
+  .contacts-list {
+	list-style-type: none;
+	padding: 0;
+	margin-bottom: 0;
+	max-height: 100%; /* Adjust the value as desired */
+  	overflow-y: auto;
+  }
+  
+  .contacts-list li {
+	padding: 10px;
+	font-family: "Nunito Regular";
+	color: rgb(47,77,82);
+	font-size: 40px;
+
+  }
+  
+  .contacts-list li:hover {
+	background-color: lightgray;
+  }
+  
+  .contacts-list li button {
+	margin-left: 10px;
+  }

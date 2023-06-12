@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import phonebook from './comms/phonebook'
-import utils from './utils'
+//import utils from './utils'
 
 //const capitalizeName = utils.capitalizeName
 
@@ -16,11 +16,10 @@ const Notification = ({ message }) => {
 	)
 }
 
-const SearchFilter = ({ handleSearchChange, searchInput }) => {
+const SearchFilter = ({ handleSearchChange, searchInput, className }) => {
 	return (
 		<div>
-      Search: <input value={searchInput}
-				onChange={handleSearchChange}/>
+      		<input type="text" placeholder="Name..." value={searchInput} onChange={handleSearchChange} className={className} />
 		</div>
 	)
 }
@@ -42,16 +41,18 @@ const Persons = ({ contacts, setPersons, setMessage }) => {
 		}
 	}
 	console.log('render', contacts.length, 'persons')
-	return(
-		<div>
+	return (
+		<div className="contacts-scrollbar">
+		  <ul className="contacts-list">
 			{contacts.map(contact => (
-				<p key={contact.id}>
-					{contact.name} {contact.number} {contact.email} {''}
-					<button onClick={() => handleDelete(contact.id)}>delete</button>
-				</p>
+			  <li key={contact.id}>
+				{contact.name} {contact.number} {contact.email} {''}
+				<button onClick={() => handleDelete(contact.id)}>delete</button>
+			  </li>
 			))}
+		  </ul>
 		</div>
-	)
+	  );
 }
 
 const FormAddNewContact = ({ addContact, newName, handleNameChange, newNumber, handleNumberChange, newEmail, handleEmailChange }) => {
@@ -164,26 +165,35 @@ const App = () => {
 	const filteredPersons = persons.filter(person => person.name.toLowerCase().includes(searchInput.toLowerCase()))
 
 	return (
-		<div>
-			<h1>CONTACT BOOK</h1>
-			<Notification message={message} />
-			<SearchFilter handleSearchChange={handleSearchChange} searchInput={searchInput}/>
-			<h2>Add New Contact</h2>
-			<button onClick={() => setShowForm(!showForm)}>Toggle Form</button> {/* Button to toggle form display */}
-			{showForm && (
-				<FormAddNewContact
-					addContact={addContact}
-					newName={newName}
-					handleNameChange={handleNameChange}
-					newNumber={newNumber}
-					handleNumberChange={handleNumberChange}
-					handleEmailChange={handleEmailChange}
-				/>
-			)}
-			<h2>Numbers</h2>
-			<Persons contacts={filteredPersons} setPersons={setPersons} setMessage={setMessage}/>
+		<>
+		<h1>CONTACT BOOK</h1>
+		<div className="bar-container">
+			<div className="bar">
+				<h2>Your contacts</h2>
+				<SearchFilter handleSearchChange={handleSearchChange} searchInput={searchInput} className="search-bar"/>
+				<button onClick={() => setShowForm(!showForm)} className="new-button" >+</button>
+			</div>
 		</div>
-	)
+		  
+		  <div className={`container ${showForm ? 'dimmed-background' : ''}`}>
+			  <div className="content">
+			  <Notification message={message} />
+			  {showForm && (
+				<FormAddNewContact
+				  addContact={addContact}
+				  newName={newName}
+				  handleNameChange={handleNameChange}
+				  newNumber={newNumber}
+				  handleNumberChange={handleNumberChange}
+				  handleEmailChange={handleEmailChange}
+				/>
+			  )}
+			  <Persons contacts={filteredPersons} setPersons={setPersons} setMessage={setMessage} />
+			</div>
+		  </div>
+		</>
+	  );
+	  
 
 }
 
