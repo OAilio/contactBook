@@ -17,9 +17,9 @@ h1 {
 	color: rgb(47,77,82);
 	text-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
 	font-size: 96px;
-	margin-right: 450px;
 	margin-bottom: 0px;
 	margin-top: 0px;
+	margin-right: 400px;
 	text-align: center;
 }
 
@@ -53,19 +53,19 @@ body {
 	margin: 10px;
 	padding: 0;
 	background-color: rgb(255, 247, 114);
-	overflow-y: scroll;
+	overflow: hidden;
   }
 
-.form-container {
-	position: absolute;
-	top: 100%;
+  .form-container {
+	position: fixed;
+	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
 	background-color: #fff;
 	padding: 20px;
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 	z-index: 999;
-  }
+}
 
   .new-button{
 	background-color: rgb(47,77,82);
@@ -152,6 +152,7 @@ body {
   }
 
 .search-bar{
+	font-family: "Nunito Regular";
 	margin-left:290px;
 	margin-right: 17px;
 	border: none;
@@ -178,7 +179,6 @@ body {
 	top: 284px;
 	left: 0;
 	width: 100%;
-	height: calc(100% - 284px);
 	z-index: 999;
 	overflow-y: auto;
 	background-color: transparent;
@@ -205,6 +205,8 @@ body {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	box-sizing: border-box;
+	z-index: 1;
   }
 
   .contacts-list {
@@ -212,16 +214,40 @@ body {
 	padding-top: 0px;
 	padding-left: 10px;
 	padding-right: 10px;
-	margin: 0;
-	width: 1190px;
+	margin-top: 0px;
+	margin-left: 0px;
+	margin-bottom: 0px;
+	margin-right: 0px;
+	width: 1170px;
 	background-color: rgb(47,77,82);
 	/* border-radius: 30px; */
 	border-bottom-left-radius: 30px;
 	border-bottom-right-radius: 30px;
-	box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.25);
+	box-shadow: 4px 4px 5px 4px rgba(0, 0, 0, 0.25);
 	position: relative; /* Added position */
-  	z-index: 1; /* Added z-index value */
+  	z-index: 2; /* Added z-index value */
+	height: 65vh; /* Adjust the value as per your requirements */
+	overflow-y: scroll;
+	scrollbar-width: thin; /* Set the width of the scrollbar */
   }
+
+  
+.contacts-list::-webkit-scrollbar {
+	width: 25px; /* Set the width of the scrollbar */
+	margin-top: 200px;
+}
+
+.contacts-list::-webkit-scrollbar-thumb {
+	background-color: rgba(255, 255, 255, 0.7); /* Set the color of the scrollbar thumb */
+	border-radius: 30px; /* Set the border radius of the scrollbar thumb */
+}
+
+.contacts-list::-webkit-scrollbar-track {
+	background-color: rgb(92, 214, 194); /* Set the background color of the scrollbar track */
+	margin-top: 5px;
+	margin-bottom: 30px;
+	border-radius: 30px;
+}
   
   /* .contact-item {
 	display: grid;

@@ -46,7 +46,9 @@ const Persons = ({ contacts, setPersons, setMessage }) => {
 	return (
 		<div className="contacts-scrollbar">
 		  <ul className="contacts-list">
-			{contacts.map(contact => (
+			{contacts
+			.sort((a, b) => a.name.localeCompare(b.name))
+			.map(contact => (
 			  <li key={contact.id} className="contact-item">
 			  <span className="contact-name">{contact.name}</span>
 			  <span className="contact-number">{contact.number}</span>
@@ -66,7 +68,7 @@ const Persons = ({ contacts, setPersons, setMessage }) => {
 	  );	  
 }
 
-const FormAddNewContact = ({ addContact, newName, handleNameChange, newNumber, handleNumberChange, newEmail, handleEmailChange }) => {
+const FormAddNewContact = ({ addContact, newName, handleNameChange, newNumber, handleNumberChange, newEmail, handleEmailChange, showForm, setShowForm }) => {
 	return (
 		<div className="form-container">
 			<form onSubmit={addContact} className="form-add-new-contact">
@@ -81,6 +83,7 @@ const FormAddNewContact = ({ addContact, newName, handleNameChange, newNumber, h
 				</div>
 				<div>
 					<button type="submit"><b>add</b></button>
+					<button onClick={() => setShowForm(!showForm)}><b>close</b></button>
 				</div>
 			</form>
 		</div>
@@ -130,6 +133,7 @@ const App = () => {
 					setNewName('')
 					setNewNumber('')
 					setNewEmail('')
+					setShowForm(false)
 					setMessage(`${newName} was successfully added to the phonebook!`)
 					setTimeout(() => {
 						setMessage(null)
@@ -187,10 +191,11 @@ const App = () => {
 				</button>
 			</div>
 		</div>
-		  
+			<Notification message={message} />
+		<div className="content">
+			<Persons contacts={filteredPersons} setPersons={setPersons} setMessage={setMessage} />
+		</div>
 		  <div className={`container ${showForm ? 'dimmed-background' : ''}`}>
-			  <div className="content">
-			  <Notification message={message} />
 			  {showForm && (
 				<FormAddNewContact
 				  addContact={addContact}
@@ -199,15 +204,13 @@ const App = () => {
 				  newNumber={newNumber}
 				  handleNumberChange={handleNumberChange}
 				  handleEmailChange={handleEmailChange}
+				  showForm={showForm}
+				  setShowForm={setShowForm}
 				/>
 			  )}
-			  <Persons contacts={filteredPersons} setPersons={setPersons} setMessage={setMessage} />
-			</div>
 		  </div>
 		</>
 	  );
-	  
-
 }
 
 export default App
