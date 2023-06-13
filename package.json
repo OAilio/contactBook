@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start" : "node index.js",
+    "start": "node index.js",
     "frontend": "cd frontend && npm start",
     "dev": "nodemon backend/index.js",
     "lint": "eslint .",
@@ -29,6 +29,9 @@
     "nodemon": "^2.0.21"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.4.0",
+    "@fortawesome/free-solid-svg-icons": "^6.4.0",
+    "@fortawesome/react-fontawesome": "^0.2.0",
     "axios": "^1.4.0",
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",

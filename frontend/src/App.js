@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react'
 import phonebook from './comms/phonebook'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus, faPen, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 //import utils from './utils'
 
 //const capitalizeName = utils.capitalizeName
@@ -45,14 +47,23 @@ const Persons = ({ contacts, setPersons, setMessage }) => {
 		<div className="contacts-scrollbar">
 		  <ul className="contacts-list">
 			{contacts.map(contact => (
-			  <li key={contact.id}>
-				{contact.name} {contact.number} {contact.email} {''}
-				<button onClick={() => handleDelete(contact.id)}>delete</button>
-			  </li>
+			  <li key={contact.id} className="contact-item">
+			  <span className="contact-name">{contact.name}</span>
+			  <span className="contact-number">{contact.number}</span>
+			  <span className="contact-email">{contact.email}</span>
+			  <div className="button-group">
+				<button onClick={() => handleDelete(contact.id)} className="edit-button">
+				  <FontAwesomeIcon icon={faPen} size="xs" />
+				</button>
+				<button onClick={() => handleDelete(contact.id)} className="delete-button">
+				  <FontAwesomeIcon icon={faTrashAlt} size="xs" />
+				</button>
+			  </div>
+			</li>
 			))}
 		  </ul>
 		</div>
-	  );
+	  );	  
 }
 
 const FormAddNewContact = ({ addContact, newName, handleNameChange, newNumber, handleNumberChange, newEmail, handleEmailChange }) => {
@@ -171,7 +182,9 @@ const App = () => {
 			<div className="bar">
 				<h2>Your contacts</h2>
 				<SearchFilter handleSearchChange={handleSearchChange} searchInput={searchInput} className="search-bar"/>
-				<button onClick={() => setShowForm(!showForm)} className="new-button" >+</button>
+				<button onClick={() => setShowForm(!showForm)} className="new-button" >
+					<FontAwesomeIcon icon={faPlus} size="xs" />
+				</button>
 			</div>
 		</div>
 		  
