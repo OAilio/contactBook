@@ -1,3 +1,4 @@
+/* eslint-disable import/no-anonymous-default-export */
 import axios from 'axios'
 const baseUrl = '/api/persons'
 
@@ -15,8 +16,14 @@ const deleteOp = (id) => {
 	return request.then(response => response.data)
 }
 
+const saveOp = (id, updatedContact) => {
+	const request = axios.put(`${baseUrl}/${id}`, updatedContact)
+	return request.then(response => response.data)
+}
+
 export default {
 	getAll: getAll,
 	add: add,
-	deleteOp : deleteOp
+	deleteOp : deleteOp,
+	saveOp: saveOp
 }

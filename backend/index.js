@@ -33,6 +33,26 @@ app.get('/api/persons/:id', (req, res, next) => {
 		.catch(error => next(error))
 })
 
+app.put('/api/persons/:id', (req, res, next) => {
+	const { name, number, email } = req.body
+
+	const contact = {
+		name,
+		number,
+		email
+	}
+
+	Contact.findByIdAndUpdate(req.params.id, contact, { new: true })
+		.then(updatedContact => {
+			if (updatedContact) {
+				res.json(updatedContact)
+			} else {
+				res.status(404).end()
+			}
+		})
+		.catch(error => next(error))
+})
+
 app.post('/api/persons', (req, res, next) => {
 	const body = req.body
 

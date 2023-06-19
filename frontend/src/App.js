@@ -27,46 +27,99 @@ const SearchFilter = ({ handleSearchChange, searchInput, className }) => {
 }
 
 const Persons = ({ contacts, setPersons, setMessage }) => {
+	const [selectedContact, setSelectedContact] = useState(null);
+  
 	const handleDelete = (id) => {
-		const toBeDeleted = contacts.find(c => c.id === id)
-		console.log(id)
-		if (window.confirm(`Delete ${toBeDeleted.name} ?`)) {
-			phonebook
-				.deleteOp(id)
-				.then(() => {
-					setPersons(contacts.filter((contact) => contact.id !== id))
-					setMessage(`${toBeDeleted.name} was successfully deleted!`)
-					setTimeout(() => {
-						setMessage(null)
-					}, 5000)
-				})
-		}
-	}
-	console.log('render', contacts.length, 'persons')
+	  const toBeDeleted = contacts.find((c) => c.id === id);
+	  console.log(id);
+	  if (window.confirm(`Delete ${toBeDeleted.name} ?`)) {
+		phonebook.deleteOp(id).then(() => {
+		  setPersons(contacts.filter((contact) => contact.id !== id));
+		  setMessage(`${toBeDeleted.name} was successfully deleted!`);
+		  setTimeout(() => {
+			setMessage(null);
+		  }, 5000);
+		});
+	  }
+	};
+  
+	const editContact = (id) => {
+	  const contactToEdit = contacts.find((c) => c.id === id);
+	  setSelectedContact(contactToEdit);
+	};
+  
+	const saveContact = () => {
+	  phonebook
+		.saveOp(selectedContact.id, selectedContact)
+		.then((data) => {
+		  setSelectedContact(null);
+		  setPersons((prevPersons) =>
+			prevPersons.map((person) =>
+			  person.id === data.id ? { ...person, ...data } : person
+			)
+		  );
+		  setMessage("Contact updated successfully!");
+		  setTimeout(() => {
+			setMessage(null);
+		  }, 5000);
+		})
+		.catch((error) => {
+		  console.log(error); // Handle the error appropriately
+		});
+	};
+  
+	console.log("render", contacts.length, "persons");
+  
 	return (
-		<div className="contacts-scrollbar">
-		  <ul className="contacts-list">
-			{contacts
+	  <div className="contacts-scrollbar">
+		<ul className="contacts-list">
+		  {contacts
 			.sort((a, b) => a.name.localeCompare(b.name))
-			.map(contact => (
+			.map((contact) => (
 			  <li key={contact.id} className="contact-item">
-			  <span className="contact-name">{contact.name}</span>
-			  <span className="contact-number">{contact.number}</span>
-			  <span className="contact-email">{contact.email}</span>
-			  <div className="button-group">
-				<button onClick={() => handleDelete(contact.id)} className="edit-button">
-				  <FontAwesomeIcon icon={faPen} size="xs" />
-				</button>
-				<button onClick={() => handleDelete(contact.id)} className="delete-button">
-				  <FontAwesomeIcon icon={faTrashAlt} size="xs" />
-				</button>
-			  </div>
-			</li>
+				<span className="contact-name">{contact.name}</span>
+				<span className="contact-number">{contact.number}</span>
+				<span className="contact-email">{contact.email}</span>
+				<div className="button-group">
+				  <button
+					onClick={() => editContact(contact.id)}
+					className="edit-button"
+				  >
+					<FontAwesomeIcon icon={faPen} size="xs" />
+				  </button>
+				  <button
+					onClick={() => handleDelete(contact.id)}
+					className="delete-button"
+				  >
+					<FontAwesomeIcon icon={faTrashAlt} size="xs" />
+				  </button>
+				</div>
+			  </li>
 			))}
-		  </ul>
-		</div>
-	  );	  
-}
+		</ul>
+		{selectedContact && (
+		  <FormAddNewContact
+			addContact={saveContact}
+			newName={selectedContact.name}
+			handleNameChange={(e) =>
+			  setSelectedContact({ ...selectedContact, name: e.target.value })
+			}
+			newNumber={selectedContact.number}
+			handleNumberChange={(e) =>
+			  setSelectedContact({ ...selectedContact, number: e.target.value })
+			}
+			newEmail={selectedContact.email}
+			handleEmailChange={(e) =>
+			  setSelectedContact({ ...selectedContact, email: e.target.value })
+			}
+			showForm={true} // Assuming you want to show the form when editing
+			setShowForm={setSelectedContact}
+		  />
+		)}
+	  </div>
+	);
+  };
+  
 
 const FormAddNewContact = ({ addContact, newName, handleNameChange, newNumber, handleNumberChange, newEmail, handleEmailChange, showForm, setShowForm }) => {
 	return (
