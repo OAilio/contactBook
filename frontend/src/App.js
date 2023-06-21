@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import phonebook from './comms/phonebook'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus, faPen, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import { faPlus, faPen, faTrashAlt, faCircleUser, faPhone, faEnvelope } from '@fortawesome/free-solid-svg-icons';
 //import utils from './utils'
 
 //const capitalizeName = utils.capitalizeName
@@ -64,39 +64,55 @@ const Persons = ({ contacts, setPersons, setMessage }) => {
 		  }, 5000);
 		})
 		.catch((error) => {
-		  console.log(error); // Handle the error appropriately
+		  console.log(error);
 		});
 	};
   
 	console.log("render", contacts.length, "persons");
+	const zeroResults = contacts.length === 0;
   
 	return (
 	  <div className="contacts-scrollbar">
 		<ul className="contacts-list">
-		  {contacts
-			.sort((a, b) => a.name.localeCompare(b.name))
-			.map((contact) => (
-			  <li key={contact.id} className="contact-item">
-				<span className="contact-name">{contact.name}</span>
-				<span className="contact-number">{contact.number}</span>
-				<span className="contact-email">{contact.email}</span>
-				<div className="button-group">
-				  <button
-					onClick={() => editContact(contact.id)}
-					className="edit-button"
-				  >
-					<FontAwesomeIcon icon={faPen} size="xs" />
-				  </button>
-				  <button
-					onClick={() => handleDelete(contact.id)}
-					className="delete-button"
-				  >
-					<FontAwesomeIcon icon={faTrashAlt} size="xs" />
-				  </button>
-				</div>
-			  </li>
-			))}
-		</ul>
+  {zeroResults ? (
+    <li className="contact-not-found">The inquiry provided zero results :-(</li>
+  ) : (
+    <>
+    <li className="contact-icons">
+		<span className="icon-text">Name</span>
+		<FontAwesomeIcon icon={faCircleUser} className="person-icon" />
+		<span className="icon-text">Number</span>
+		<FontAwesomeIcon icon={faPhone} className="phone-icon" />
+		<span className="icon-text">E-mail</span>
+		<FontAwesomeIcon icon={faEnvelope} className="mail-icon" />
+	</li>
+      {contacts
+        .sort((a, b) => a.name.localeCompare(b.name))
+        .map((contact) => (
+          <li key={contact.id} className="contact-item">
+            <span className="contact-name">{contact.name}</span>
+            <span className="contact-number">{contact.number}</span>
+            <span className="contact-email">{contact.email}</span>
+            <div className="button-group">
+              <button
+                onClick={() => editContact(contact.id)}
+                className="edit-button"
+              >
+                <FontAwesomeIcon icon={faPen} size="xs" />
+              </button>
+              <button
+                onClick={() => handleDelete(contact.id)}
+                className="delete-button"
+              >
+                <FontAwesomeIcon icon={faTrashAlt} size="xs" />
+              </button>
+            </div>
+          </li>
+        ))
+      }
+    </>
+  )}
+</ul>
 		{selectedContact && (
 		  <FormAddNewContact
 			addContact={saveContact}
@@ -114,6 +130,7 @@ const Persons = ({ contacts, setPersons, setMessage }) => {
 			}
 			showForm={true} // Assuming you want to show the form when editing
 			setShowForm={setSelectedContact}
+			task={selectedContact ? 'edit' : 'add'}
 		  />
 		)}
 	  </div>
@@ -121,10 +138,12 @@ const Persons = ({ contacts, setPersons, setMessage }) => {
   };
   
 
-const FormAddNewContact = ({ addContact, newName, handleNameChange, newNumber, handleNumberChange, newEmail, handleEmailChange, showForm, setShowForm }) => {
+const FormAddNewContact = ({ addContact, newName, handleNameChange, newNumber, handleNumberChange, newEmail, handleEmailChange, showForm, setShowForm, task }) => {
+	const headingText = task === 'add' ? 'Add a Contact' : 'Edit contact'
 	return (
 		<div className="form-container">
 			<form onSubmit={addContact} className="form-add-new-contact">
+				<div className="form-heading">{headingText}</div>
 				<div>
 					Name: <input value={newName} onChange={handleNameChange} />
 				</div>
@@ -135,8 +154,8 @@ const FormAddNewContact = ({ addContact, newName, handleNameChange, newNumber, h
 					E-mail: <input value={newEmail} onChange={handleEmailChange} />
 				</div>
 				<div>
-					<button type="submit"><b>add</b></button>
-					<button onClick={() => setShowForm(!showForm)}><b>close</b></button>
+					<button className="cancel-button" onClick={() => setShowForm(!showForm)}><b>Cancel</b></button>
+					<button className="save-button" type="submit"><b>SAVE</b></button>
 				</div>
 			</form>
 		</div>
@@ -231,6 +250,7 @@ const App = () => {
 	}
 
 	const filteredPersons = persons.filter(person => person.name.toLowerCase().includes(searchInput.toLowerCase()))
+
 
 	return (
 		<>
