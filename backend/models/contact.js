@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const validator = require('validator')
 require('dotenv').config()
 
 const url = process.env.MONGODB_URI
@@ -23,11 +24,13 @@ const contactSchema = new mongoose.Schema({
 	},
 	number: {
 		type: String,
+		maxlength: 15,
 		required: true
 	},
 	email: {
 		type: String,
-		required: false
+		required: false,
+		match: /^\S+@\S+\.\S+$/,
 	}
 
 })
