@@ -26,27 +26,26 @@ h1 {
 h2 {
 	font-family: "Nunito Regular";
 	color: rgb(47,77,82);
-	margin-left: 70px;
+	margin-left: 50px;
 	margin-bottom: 0px;
 	margin-top: 0px;
 	text-align: left;
 	font-size: 51px;
 }
 
-/* .message {
-	background: rgba(0, 38, 255, 0.39);
-	font-size: 20px;
-	font-family: "Lucida Console", "Courier New", monospace;
-	border-style: solid;
-	border-radius: 5px;
-	border-color: rgb(2, 56, 235);
-	padding: 10px;
-	text-align: center;
-	margin-bottom: 0px;
-	margin-top: 0px;
-	margin-left: 350px;
-	margin-right: 350px
-} */
+.message {
+	display: flex;
+  	justify-content: center;
+  	align-items: center;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background-color: #fff;
+	padding: 20px;
+	border-radius: 15px;
+	z-index: 999;
+}
 
 
 body {
@@ -67,7 +66,6 @@ body {
 	background-color: #fff;
 	padding: 20px;
 	border-radius: 15px;
-	box-shadow: 1000px 10000px 1000px rgba(0, 0, 0, 0.2);
 	z-index: 999;
 }
 
@@ -133,12 +131,15 @@ body {
 	border: none;
 	font-family: "Nunito Regular";
 	font-size: 20px;
+	transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .form-add-new-contact .save-button:hover{
-	color:  rgb(47,77,82);
-	background-color: white;
+	color:  rgb(47, 77, 82);
+	background-color: rgb(255, 247, 114);
 	box-shadow: 8px 8px 15px rgba(0, 0, 0, 0.25);
+	border-style: solid; 
+	border-color: rgb(47, 77, 82);
 }
 
 .form-add-new-contact .cancel-button{
@@ -152,11 +153,13 @@ body {
 	border-color: rgb(47, 77, 82);
 	font-family: "Nunito Regular";
 	font-size: 20px;
+	transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .form-add-new-contact .cancel-button:hover{
-	color:  rgb(47,77,82);
-	background-color: white;
+	color:  white;
+	border-color: none;
+	background-color: rgb(180, 180, 180);
 	box-shadow: 8px 8px 15px rgba(0, 0, 0, 0.25);
 }
 
@@ -246,9 +249,9 @@ body {
   }
 
 .search-bar{
-	color:rgb(47, 77, 82);
+	background-color:rgb(255, 255, 255);
 	font-family: "Nunito Regular";
-	margin-left:265px;
+	margin-left:275px;
 	margin-right: 10px;
 	border: none;
 	font-size: 24px;
@@ -262,9 +265,26 @@ body {
 	caret-color: rgb(47, 77, 82);
 }
 
-.search-bar::placeholder{
+.search-input {
+	color: rgb(47, 77, 82);
+	caret-color: rgb(47, 77, 82);
+	outline: none;
+	font-size: 24px;
+	border: none;
+	width: 250px;
+}
+
+.search-icon {
+	color: rgb(203, 210, 212); 
+    margin-right: 8px; /* Add some margin to separate the icon from the input */
+    font-size: 24px; /* Adjust the size of the FontAwesome icon */
+}
+
+.search-input::placeholder{
 	color: rgb(203, 210, 212); 
 }
+
+
 
 /* .search-bar:focus {
 	outline: 2px solid rgb(47, 77, 82);
@@ -286,15 +306,15 @@ body {
 	margin-bottom: 0;
   	} */
   
-  /* .dimmed-background {
+  .dimmed-background {
 	position: fixed;
 	top: 0;
 	left: 0;
 	width: 100%;
 	height: 100%;
-	background-color: rgba(0, 0, 0, 0.5);
+	background-color: rgba(0, 0, 0, 0.6);
 	z-index: 998;
-  } */
+  }
 
   .contact-icons {
 	display: flex;

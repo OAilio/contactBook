@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import phonebook from './comms/phonebook'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus, faPen, faTrashAlt, faCircleUser, faPhone, faEnvelope } from '@fortawesome/free-solid-svg-icons';
+import { faSearch, faPlus, faPen, faTrashAlt, faCircleUser, faPhone, faEnvelope } from '@fortawesome/free-solid-svg-icons';
 
 const Notification = ({ message }) => {
     if (message === null) {
@@ -15,10 +15,17 @@ const Notification = ({ message }) => {
     );
 };
 
-const SearchFilter = ({ handleSearchChange, searchInput, className }) => {
+const SearchFilter = ({ handleSearchChange, searchInput }) => {
     return (
-        <div>
-            <input type="text" placeholder="Name..." value={searchInput} onChange={handleSearchChange} className={className} />
+        <div className="search-bar">
+            <FontAwesomeIcon icon={faSearch} className="search-icon" />
+            <input
+                type="text"
+                placeholder="Name..."
+                value={searchInput}
+                onChange={handleSearchChange}
+				className="search-input"
+            />
         </div>
     );
 };
@@ -216,7 +223,6 @@ const App = () => {
                     console.log(response);
                 })
                 .catch((error) => {
-					console.log("Virheviestiin mentiin")
                     handleErrorResponse(error);
                 });
         }
@@ -343,13 +349,12 @@ const App = () => {
             <div className="bar-container">
                 <div className="bar">
                     <h2>Your contacts</h2>
-                    <SearchFilter handleSearchChange={handleSearchChange} searchInput={searchInput} className="search-bar" />
+                    <SearchFilter handleSearchChange={handleSearchChange} searchInput={searchInput}/>
                     <button onClick={handleNewContactClick} className="new-button">
                         <FontAwesomeIcon icon={faPlus} size="xs" />
                     </button>
                 </div>
             </div>
-            <Notification message={message} />
             <div className="content">
                 <Persons contacts={filteredPersons}
                     setPersons={setPersons}
@@ -358,23 +363,26 @@ const App = () => {
                 />
             </div>
             {showForm && (
-                <FormAddNewContact
-                    addContact={addContact}
-                    editContact={editContact}
-                    selectedContact={selectedContact}
-                    newName={newName}
-                    handleNameChange={handleNameChange}
-                    newNumber={newNumber}
-                    handleNumberChange={handleNumberChange}
-                    newEmail={newEmail}
-                    handleEmailChange={handleEmailChange}
-                    showForm={showForm}
-                    setShowForm={setShowForm}
-                    task={selectedContact ? 'edit' : 'add'}
-                    clearFields={clearFields}
-					saveEditedContact={saveEditedContact} 
-                />
+				<div className={`container ${showForm ? 'dimmed-background' : ''}`}>
+					<FormAddNewContact
+						addContact={addContact}
+						editContact={editContact}
+						selectedContact={selectedContact}
+						newName={newName}
+						handleNameChange={handleNameChange}
+						newNumber={newNumber}
+						handleNumberChange={handleNumberChange}
+						newEmail={newEmail}
+						handleEmailChange={handleEmailChange}
+						showForm={showForm}
+						setShowForm={setShowForm}
+						task={selectedContact ? 'edit' : 'add'}
+						clearFields={clearFields}
+						saveEditedContact={saveEditedContact}
+					/>
+				</div>
             )}
+			<Notification message={message} />
         </>
     );
 };
