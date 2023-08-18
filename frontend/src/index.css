@@ -67,13 +67,13 @@ body {
 	background-color: #fff;
 	padding: 20px;
 	border-radius: 15px;
-	box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+	box-shadow: 1000px 10000px 1000px rgba(0, 0, 0, 0.2);
 	z-index: 999;
-	align-items: center;
 }
 
 .form-add-new-contact {
-	width: 200px;
+	width: 300px;
+	height: 340px;
 	margin: 0 auto;
 	color: rgb(47, 77, 82);
 	display: flex;
@@ -81,17 +81,85 @@ body {
   	justify-content: center;
   	align-items: center;
 	text-align: center;
-	font-family: "Nunito Bold";
+	font-family: "Nunito Regular";
 	padding: 10px;
 }
 
+
+
+  .form-heading {
+	align-self: center;
+	font-family: "Nunito Bold";
+	font-size: 35px;
+	margin-bottom: 15px;
+  }
+  
+  .form-field {
+	margin-bottom: 10px;
+  }
+  
+  .form-field label {
+	display: block;
+	font-size: 18px;
+	margin-bottom: 5px;
+	text-align: left;
+  }
+  
+  .form-field input {
+	width: 230px;
+	max-width: 300px; /* Adjust the max-width value as needed */
+	padding: 8px;
+	border-radius: 30px;
+	border: 1px solid rgb(47, 77, 82);
+	font-size: 18px;
+	font-family: "Nunito Regular";
+	color: rgb(47, 77, 82);
+	box-shadow: inset 0px 2px 4px rgba(0, 0, 0, 0.25);
+	caret-color: rgb(47, 77, 82);
+  }
+  
+  .form-button-group {
+	display: flex;
+	justify-content: center;
+  }
+
 .form-add-new-contact .save-button{
-	color: red;
+	color: rgb(255, 247, 114);
+	background-color: rgb(47, 77, 82);
+	height: 42px;
+	width: 120px;
+	margin: 5px;
+	border-radius: 30px;
+	border: none;
+	font-family: "Nunito Regular";
+	font-size: 20px;
+}
+
+.form-add-new-contact .save-button:hover{
+	color:  rgb(47,77,82);
+	background-color: white;
+	box-shadow: 8px 8px 15px rgba(0, 0, 0, 0.25);
 }
 
 .form-add-new-contact .cancel-button{
-	color: blue;
+	color: rgb(47, 77, 82);
+	background-color: white;
+	height: 42px;
+	width: 120px;
+	margin: 5px;
+	border-radius: 30px;
+	border-style: solid;
+	border-color: rgb(47, 77, 82);
+	font-family: "Nunito Regular";
+	font-size: 20px;
 }
+
+.form-add-new-contact .cancel-button:hover{
+	color:  rgb(47,77,82);
+	background-color: white;
+	box-shadow: 8px 8px 15px rgba(0, 0, 0, 0.25);
+}
+
 
   .new-button{
 	background-color: rgb(47,77,82);
@@ -198,6 +266,10 @@ body {
 	color: rgb(203, 210, 212); 
 }
 
+/* .search-bar:focus {
+	outline: 2px solid rgb(47, 77, 82);
+} */
+
 .container {
 	top: 284px;
 	left: 0;
@@ -214,7 +286,7 @@ body {
 	margin-bottom: 0;
   	} */
   
-  .dimmed-background {
+  /* .dimmed-background {
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -222,7 +294,7 @@ body {
 	height: 100%;
 	background-color: rgba(0, 0, 0, 0.5);
 	z-index: 998;
-  }
+  } */
 
   .contact-icons {
 	display: flex;
@@ -266,7 +338,7 @@ body {
 	color: white;
   }
 
-  .contacts-scrollbar {
+  .contacts-flexbox {
 	display: flex;
 	justify-content: center;
 	align-items: center;
