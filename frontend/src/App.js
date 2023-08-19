@@ -108,30 +108,34 @@ const FormAddNewContact = ({
     setShowForm,
     task,
     clearFields,
-	saveEditedContact
-	}) => {
-        const isEditTask = task === 'edit';
-		const headingText = isEditTask ? 'Edit contact' : 'Add new contact';
-		const initialName = isEditTask ? selectedContact.name : '';
-		const initialNumber = isEditTask ? selectedContact.number : '';
-		const initialEmail = isEditTask ? selectedContact.email : '';
+    clearErrorMessages,
+    saveEditedContact,
+    nameValidationMessage,
+    numberValidationMessage,
+    emailValidationMessage
+}) => {
+    const isEditTask = task === 'edit';
+    const headingText = isEditTask ? 'Edit contact' : 'Add new contact';
+    const initialName = isEditTask ? selectedContact.name : '';
+    const initialNumber = isEditTask ? selectedContact.number : '';
+    const initialEmail = isEditTask ? selectedContact.email : '';
 
-        const handleSubmit = (event) => {
-			event.preventDefault();
-			if (isEditTask) {
-				saveEditedContact(event);
-			} else {
-				addContact(event);
-			}
-			setShowForm(false);
-		};
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        if (isEditTask) {
+            saveEditedContact(event);
+        } else {
+            addContact(event);
+        }
+    };
 
-        const handleCancel = () => {
-            clearFields();
-            setShowForm(false);
-        };
+    const handleCancel = () => {
+        clearFields();
+        clearErrorMessages();
+        setShowForm(false);
+    };
 
-        return (
+    return (
         <div className="form-container">
             {showForm && (
                 <form onSubmit={handleSubmit} className="form-add-new-contact">
@@ -141,27 +145,36 @@ const FormAddNewContact = ({
                         <input
                             type="text"
                             id="name"
+                            placeholder="John Appleseed"
                             value={isEditTask ? initialName : newName}
                             onChange={handleNameChange}
                         />
+                        {/* Display name validation message */}
+                        <p className="validation-message">{nameValidationMessage}</p>
                     </div>
                     <div className="form-field">
                         <label htmlFor="number">Number</label>
                         <input
                             type="text"
                             id="number"
+                            placeholder="040 123 4567"
                             value={isEditTask ? initialNumber : newNumber}
                             onChange={handleNumberChange}
                         />
+                        {/* Display number validation message */}
+                        <p className="validation-message">{numberValidationMessage}</p>
                     </div>
                     <div className="form-field">
                         <label htmlFor="email">Email</label>
                         <input
                             type="text"
                             id="email"
+                            placeholder="john@example.com"
                             value={isEditTask ? initialEmail : newEmail}
                             onChange={handleEmailChange}
                         />
+                        {/* Display email validation message */}
+                        <p className="validation-message">{emailValidationMessage}</p>
                     </div>
                     <div className="form-button-group">
                         <button className="cancel-button" onClick={handleCancel}>
@@ -175,7 +188,7 @@ const FormAddNewContact = ({
             )}
         </div>
     );
-    };
+};
 
 const App = () => {
     const [persons, setPersons] = useState([]);
@@ -186,6 +199,9 @@ const App = () => {
     const [message, setMessage] = useState(null);
     const [showForm, setShowForm] = useState(false);
     const [selectedContact, setSelectedContact] = useState(null);
+    const [nameValidationMessage, setNameValidationMessage] = useState('');
+    const [numberValidationMessage, setNumberValidationMessage] = useState('');
+    const [emailValidationMessage, setEmailValidationMessage] = useState('');
 
     useEffect(() => {
         console.log('effect');
@@ -198,34 +214,68 @@ const App = () => {
     }, []);
 
     const addContact = (event) => {
-		event.preventDefault()
+        event.preventDefault();
         const personObject = {
             name: newName,
             number: newNumber,
             email: newEmail,
             id: persons.length + 1,
         };
-
+    
+        const validationMessage = validateContact(personObject);
+    
+        if (validationMessage) {
+            // alert(validationMessage);
+            return;
+        }
+    
         if (persons.some((person) => person.name === newName)) {
             console.log(personObject);
             alert(`Contact ${newName} already exists!`);
-            clearFields();
             return;
-        } else {
-            console.log(personObject);
-            phonebook
-                .add(personObject)
-                .then((response) => {
-                    setPersons(persons.concat(personObject));
-                    clearFields();
-                    setShowForm(false);
-                    showMessage(`${newName} was successfully added to the phonebook!`);
-                    console.log(response);
-                })
-                .catch((error) => {
-                    handleErrorResponse(error);
-                });
         }
+    
+        console.log(personObject);
+        phonebook
+            .add(personObject)
+            .then((response) => {
+                setPersons(persons.concat(personObject));
+                clearFields();
+                setShowForm(false);
+                showMessage(`${newName} was successfully added to the phonebook!`);
+                console.log(response);
+            })
+            .catch((error) => {
+                handleErrorResponse(error);
+            });
+    };
+    
+    const validateContact = (contact) => {
+        let nameMessage = '';
+        let numberMessage = '';
+        let emailMessage = '';
+    
+        if (contact.name.length < 3) {
+            nameMessage = 'Name must be at least 3 characters long';
+        }
+    
+        if (!/^[0-9+\-()\s#*]+$/.test(contact.number)) {
+            numberMessage = 'Invalid phone number format';
+        }
+    
+        if (contact.email && !/^\S+@\S+\.\S+$/.test(contact.email)) {
+            emailMessage = 'Invalid email format';
+        }
+    
+        setNameValidationMessage(nameMessage);
+        setNumberValidationMessage(numberMessage);
+        setEmailValidationMessage(emailMessage);
+    
+        if (nameMessage || numberMessage || emailMessage) {
+            return 'Validation failed'; // Return a general validation failure message
+        }
+    
+        return null; // Validation successful
     };
 
     const editContact = (contact) => {
@@ -243,6 +293,13 @@ const App = () => {
 			email: event.target.email.value,
 		};
 
+        const validationMessage = validateContact(updatedContact);
+
+        if (validationMessage) {
+            // alert(validationMessage);
+            return;
+        }
+
 		console.log(updatedContact.id)
 	
 		phonebook
@@ -251,6 +308,7 @@ const App = () => {
 				updatePersonInList(data);
 				setSelectedContact(null);
 				clearFields(); // Clear the form fields
+                setShowForm(false)
 				showMessage("Contact updated successfully!");
 			})
 			.catch((error) => {
@@ -263,6 +321,12 @@ const App = () => {
         setNewNumber("");
         setNewEmail("");
     };
+
+    const clearErrorMessages = () => {
+        setNameValidationMessage('')
+        setNumberValidationMessage('')
+        setEmailValidationMessage('')
+    }
 
     const showMessage = (message) => {
         setMessage(message);
@@ -378,7 +442,11 @@ const App = () => {
 						setShowForm={setShowForm}
 						task={selectedContact ? 'edit' : 'add'}
 						clearFields={clearFields}
+                        clearErrorMessages={clearErrorMessages}
 						saveEditedContact={saveEditedContact}
+                        nameValidationMessage={nameValidationMessage}
+                        numberValidationMessage={numberValidationMessage}
+                        emailValidationMessage={emailValidationMessage}
 					/>
 				</div>
             )}

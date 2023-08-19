@@ -21,18 +21,35 @@ const contactSchema = new mongoose.Schema({
 		type: String,
 		minlength: 3,
 		required: true,
+		validate: {
+			validator: function(value) {
+				return value.length >= 3
+			},
+			message: 'Name must be at least 3 characters long'
+		}
 	},
 	number: {
 		type: String,
 		maxlength: 15,
-		required: true
+		required: true,
+		validate: {
+			validator: function(value) {
+				return /^[0-9+\-()\s#*]+$/.test(value)
+			},
+			message: 'Invalid phone number format'
+		}
 	},
 	email: {
 		type: String,
 		required: false,
 		match: /^\S+@\S+\.\S+$/,
+		validate: {
+			validator: function(value) {
+				return /^\S+@\S+\.\S+$/.test(value)
+			},
+			message: 'Invalid email format'
+		}
 	}
-
 })
 
 contactSchema.set('toJSON', {
