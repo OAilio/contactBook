@@ -133,10 +133,6 @@ body {
     margin-bottom: 20px; /* Add some space between field and message */
 }
   
-  .form-field {
-	/* margin-bottom: 10px; */
-  }
-  
   .form-field label {
 	position: relative;
 	display: block;

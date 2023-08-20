@@ -36,17 +36,14 @@ const SearchFilter = ({ handleSearchChange, searchInput }) => {
     );
 };
 
-const Persons = ({ contacts, setPersons, setMessage, editContact }) => {
+const Persons = ({ contacts, setPersons, showMessage, editContact }) => {
     const handleDelete = (id) => {
         const toBeDeleted = contacts.find((c) => c.id === id);
         console.log(id);
-        if (window.confirm(`Delete ${toBeDeleted.name} ?`)) {
+        if (window.confirm(`Are you sure you want to delete contact ${toBeDeleted.name}?`)) {
             phonebook.deleteOp(id).then(() => {
                 setPersons(contacts.filter((contact) => contact.id !== id));
-                setMessage(`${toBeDeleted.name} was successfully deleted!`);
-                setTimeout(() => {
-                    setMessage(null);
-                }, 5000);
+                showMessage(`${toBeDeleted.name} was successfully deleted!`);
             });
         }
     };
@@ -263,10 +260,13 @@ const App = () => {
         phonebook
             .add(personObject)
             .then((response) => {
-                setPersons(persons.concat(personObject));
-                clearFields();
-                setShowForm(false);
-                showMessage(`${newName} was successfully added to the phonebook!`);
+                // Fetch the updated list of contacts from the server
+                phonebook.getAll().then((response) => {
+                    setPersons(response.data);
+                    clearFields();
+                    setShowForm(false);
+                    showMessage(`${newName} was successfully added to contacts!`);
+                });
                 console.log(response);
             })
             .catch((error) => {
@@ -360,7 +360,7 @@ const App = () => {
         setMessage(message);
         setTimeout(() => {
             setMessage(null);
-        }, 5000);
+        }, 10000);
     };
 
     const handleErrorResponse = (error) => {
@@ -450,7 +450,7 @@ const App = () => {
             <div className="content">
                 <Persons contacts={filteredPersons}
                     setPersons={setPersons}
-                    setMessage={setMessage}
+                    showMessage={showMessage}
                     editContact={editContact}
                 />
             </div>
