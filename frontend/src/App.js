@@ -1,16 +1,22 @@
 import { useState, useEffect } from 'react'
 import phonebook from './comms/phonebook'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch, faPlus, faPen, faTrashAlt, faCircleUser, faPhone, faEnvelope } from '@fortawesome/free-solid-svg-icons';
+import {faSearch, faPlus, faPen, faTrashAlt, faCircleUser, faPhone, faEnvelope } from '@fortawesome/free-solid-svg-icons';
+import { formatPhoneNumber } from './utils';
 
-const Notification = ({ message }) => {
+const Notification = ({ message, setMessage }) => {
     if (message === null) {
         return null;
     }
 
     return (
         <div className="message">
-            {message}
+            <div className="message-content">
+                {message}
+            </div>
+            <button className="ok-button" onClick={() => setMessage(null)}>
+                Confirm
+            </button>
         </div>
     );
 };
@@ -68,8 +74,16 @@ const Persons = ({ contacts, setPersons, setMessage, editContact }) => {
                             .map((contact) => (
                                 <li key={contact.id} className="contact-item">
                                     <span className="contact-name">{contact.name}</span>
-                                    <span className="contact-number">{contact.number}</span>
-                                    <span className="contact-email">{contact.email}</span>
+                                    <span className="contact-number">
+                                        <a href={`tel:${contact.number}`} className="link-style">
+                                            {formatPhoneNumber(contact.number)}
+                                        </a>
+                                    </span>
+                                    <span className="contact-email">
+                                        <a href={`mailto:${contact.email}`} className="link-style">
+                                            {contact.email}
+                                        </a>
+                                    </span>
                                     <div className="button-group">
                                         <button
                                             onClick={() => editContact(contact)}
@@ -87,6 +101,7 @@ const Persons = ({ contacts, setPersons, setMessage, editContact }) => {
                                 </li>
                             ))
                         }
+
                     </>
                 )}
             </ul>
@@ -140,41 +155,50 @@ const FormAddNewContact = ({
             {showForm && (
                 <form onSubmit={handleSubmit} className="form-add-new-contact">
                     <div className="form-heading">{headingText}</div>
-                    <div className="form-field">
-                        <label htmlFor="name">Name</label>
-                        <input
-                            type="text"
-                            id="name"
-                            placeholder="John Appleseed"
-                            value={isEditTask ? initialName : newName}
-                            onChange={handleNameChange}
-                        />
-                        {/* Display name validation message */}
-                        <p className="validation-message">{nameValidationMessage}</p>
+                    <div className="form-field-container">
+                        <div className="form-field">
+                            <label htmlFor="name">Name*</label>
+                            <input
+                                type="text"
+                                id="name"
+                                placeholder="John Appleseed"
+                                value={isEditTask ? initialName : newName}
+                                onChange={handleNameChange}
+                            />
+                        </div>
+                        {nameValidationMessage && (
+                            <div className="validation-message">{nameValidationMessage}</div>
+                        )}
                     </div>
-                    <div className="form-field">
-                        <label htmlFor="number">Number</label>
-                        <input
-                            type="text"
-                            id="number"
-                            placeholder="040 123 4567"
-                            value={isEditTask ? initialNumber : newNumber}
-                            onChange={handleNumberChange}
-                        />
-                        {/* Display number validation message */}
-                        <p className="validation-message">{numberValidationMessage}</p>
+                    <div className="form-field-container">
+                        <div className="form-field">
+                            <label htmlFor="number">Number*</label>
+                            <input
+                                type="text"
+                                id="number"
+                                placeholder="040 123 4567"
+                                value={isEditTask ? initialNumber : newNumber}
+                                onChange={handleNumberChange}
+                            />
+                        </div>
+                        {numberValidationMessage && (
+                            <div className="validation-message">{numberValidationMessage}</div>
+                        )}
                     </div>
-                    <div className="form-field">
-                        <label htmlFor="email">Email</label>
-                        <input
-                            type="text"
-                            id="email"
-                            placeholder="john@example.com"
-                            value={isEditTask ? initialEmail : newEmail}
-                            onChange={handleEmailChange}
-                        />
-                        {/* Display email validation message */}
-                        <p className="validation-message">{emailValidationMessage}</p>
+                    <div className="form-field-container">
+                        <div className="form-field">
+                            <label htmlFor="email">Email</label>
+                            <input
+                                type="text"
+                                id="email"
+                                placeholder="john@example.com"
+                                value={isEditTask ? initialEmail : newEmail}
+                                onChange={handleEmailChange}
+                            />
+                        </div>
+                        {emailValidationMessage && (
+                            <div className="validation-message">{emailValidationMessage}</div>
+                        )}
                     </div>
                     <div className="form-button-group">
                         <button className="cancel-button" onClick={handleCancel}>
@@ -255,16 +279,20 @@ const App = () => {
         let numberMessage = '';
         let emailMessage = '';
     
-        if (contact.name.length < 3) {
-            nameMessage = 'Name must be at least 3 characters long';
+        if (contact.name.length === 0) {
+            nameMessage = 'Name is a mandatory field!'
+        } else if (contact.name.length < 3) {
+            nameMessage = 'Name must be at least 3 characters long!';
         }
-    
-        if (!/^[0-9+\-()\s#*]+$/.test(contact.number)) {
-            numberMessage = 'Invalid phone number format';
+
+        if (contact.number.length === 0) {
+            numberMessage = "Number is a mandatory field!";
+        } else if (!/^[0-9+\-()\s#*]+$/.test(contact.number)) {
+            numberMessage = 'Invalid phone number format!';
         }
     
         if (contact.email && !/^\S+@\S+\.\S+$/.test(contact.email)) {
-            emailMessage = 'Invalid email format';
+            emailMessage = 'Invalid email format!';
         }
     
         setNameValidationMessage(nameMessage);
@@ -309,7 +337,7 @@ const App = () => {
 				setSelectedContact(null);
 				clearFields(); // Clear the form fields
                 setShowForm(false)
-				showMessage("Contact updated successfully!");
+				showMessage("Contact saved!");
 			})
 			.catch((error) => {
 				console.log(error);
@@ -450,7 +478,9 @@ const App = () => {
 					/>
 				</div>
             )}
-			<Notification message={message} />
+			<Notification 
+                message={message}
+                setMessage={setMessage} />
         </>
     );
 };

@@ -42,13 +42,15 @@ const contactSchema = new mongoose.Schema({
 	email: {
 		type: String,
 		required: false,
-		match: /^\S+@\S+\.\S+$/,
-		validate: {
-			validator: function(value) {
-				return /^\S+@\S+\.\S+$/.test(value)
-			},
-			message: 'Invalid email format'
-		}
+		validate: [
+			{
+				validator: function(value) {
+					// Allow empty email or valid email format
+					return value === '' || /^\S+@\S+\.\S+$/.test(value)
+				},
+				message: 'Invalid email format'
+			}
+		]
 	}
 })
 

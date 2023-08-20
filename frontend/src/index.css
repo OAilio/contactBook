@@ -34,19 +34,49 @@ h2 {
 }
 
 .message {
+    font-family: "Nunito Bold";
+    color: rgb(47, 77, 82);
+    background-color: white;
+    border-style: solid;
+    border-width: 2px;
+    border-color: rgb(47, 77, 82);
+    font-size: 35px;
+    display: flex;
+    flex-direction: column; /* Set flex direction to column */
+    align-items: center;
+	text-align: center;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    border-radius: 15px;
+    z-index: 998;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.75);
+}
+
+.message-content {
+    margin-bottom: 0px; /* Add margin between message and button */
+}
+
+.ok-button {
+    color: rgb(255, 247, 114);
+	background-color: rgb(47, 77, 82);
+	height: 42px;
+	width: 120px;
+	margin: 5px;
+	border-radius: 30px;
+	border: none;
 	font-family: "Nunito Regular";
-	font-size: 40px;
-	display: flex;
-  	justify-content: center;
-  	align-items: center;
-	position: fixed;
-	top: 35%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	background-color: #fff;
-	padding: 20px;
-	border-radius: 15px;
-	z-index: 999;
+	font-size: 20px;
+	transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.ok-button:hover {
+	color: rgb(47, 77, 82);
+    background-color: rgb(255, 247, 114);
+	border-style: solid; 
+	border-color: rgb(47, 77, 82);
 }
 
 
@@ -69,11 +99,14 @@ body {
 	padding: 20px;
 	border-radius: 15px;
 	z-index: 999;
+	border-style: solid;
+    border-width: 4px;
+    border-color: rgb(47, 77, 82);
 }
 
 .form-add-new-contact {
 	width: 300px;
-	height: 340px;
+	min-height: 340px;
 	margin: 0 auto;
 	color: rgb(47, 77, 82);
 	display: flex;
@@ -83,6 +116,7 @@ body {
 	text-align: center;
 	font-family: "Nunito Regular";
 	padding: 10px;
+	
 }
 
 
@@ -93,12 +127,18 @@ body {
 	font-size: 35px;
 	margin-bottom: 15px;
   }
+
+  .form-field-container {
+    position: relative;
+    margin-bottom: 20px; /* Add some space between field and message */
+}
   
   .form-field {
-	margin-bottom: 10px;
+	/* margin-bottom: 10px; */
   }
   
   .form-field label {
+	position: relative;
 	display: block;
 	font-size: 18px;
 	margin-bottom: 5px;
@@ -111,6 +151,7 @@ body {
 	padding: 8px;
 	border-radius: 30px;
 	border: 1px solid rgb(47, 77, 82);
+	outline-color: rgb(47, 77, 82);
 	font-size: 18px;
 	font-family: "Nunito Regular";
 	color: rgb(47, 77, 82);
@@ -125,13 +166,19 @@ body {
   }
 
   .validation-message {
-	color: red;
-	font-size: 10px;
+	position: absolute;
+    bottom: -20px; /* Adjust this value to control the vertical spacing */
+    left: 0;
+    width: 100%;
+    color: red;
+    font-size: 14px;
+	/* margin: 5px */
   }
   
   .form-button-group {
 	display: flex;
 	justify-content: center;
+	margin-top: 10px;
   }
 
 .form-add-new-contact .save-button{
@@ -266,7 +313,6 @@ body {
 	font-family: "Nunito Regular";
 	margin-left:275px;
 	margin-right: 10px;
-	border: none;
 	font-size: 24px;
 	border-radius: 30px;
 	padding-left: 20px;
@@ -274,7 +320,6 @@ body {
 	padding-top: 12px;
 	padding-bottom: 8px;
 	box-shadow: inset 0px 2px 4px rgba(0, 0, 0, 0.25);
-	outline: none;
 	caret-color: rgb(47, 77, 82);
 }
 
@@ -296,12 +341,6 @@ body {
 .search-input::placeholder{
 	color: rgb(203, 210, 212); 
 }
-
-
-
-/* .search-bar:focus {
-	outline: 2px solid rgb(47, 77, 82);
-} */
 
 .container {
 	top: 284px;
@@ -457,6 +496,8 @@ body {
 	font-size: 21px; /* Adjust the font size as desired */
 	text-align: left;
 	flex-wrap: wrap; /* Added flex-wrap property */
+	color: white; /* Change this to your desired link color */
+    text-decoration: none;
   }
   .contact-email{
 	font-family: "Nunito Regular";
@@ -464,7 +505,19 @@ body {
 	font-size: 20px; /* Adjust the font size as desired */
 	text-align: left;
 	flex-wrap: wrap; /* Added flex-wrap property */
+	color: white; /* Change this to your desired link color */
+    text-decoration: none;
   }
+
+  .contacts-list a.link-style {
+    color: white;
+    text-decoration: none;
+}
+
+.contacts-list a.link-style:hover {
+    color: white;
+    text-decoration: underline;
+}
 
   .contact-not-found {
 	text-align: center;
