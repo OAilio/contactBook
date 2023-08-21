@@ -15,7 +15,7 @@ const Notification = ({ message, setMessage }) => {
                 {message}
             </div>
             <button className="ok-button" onClick={() => setMessage(null)}>
-                Confirm
+                OK
             </button>
         </div>
     );
@@ -36,15 +36,33 @@ const SearchFilter = ({ handleSearchChange, searchInput }) => {
     );
 };
 
-const Persons = ({ contacts, setPersons, showMessage, editContact }) => {
-    const handleDelete = (id) => {
-        const toBeDeleted = contacts.find((c) => c.id === id);
-        console.log(id);
-        if (window.confirm(`Are you sure you want to delete contact ${toBeDeleted.name}?`)) {
-            phonebook.deleteOp(id).then(() => {
-                setPersons(contacts.filter((contact) => contact.id !== id));
-                showMessage(`${toBeDeleted.name} was successfully deleted!`);
-            });
+const Persons = ({ contacts, setPersons, showMessage, editContact, handleErrorResponse }) => {
+    const [confirmation, setConfirmation] = useState(null);
+
+    const handleDelete = (id, name) => {
+        setConfirmation({
+            id,
+            name,
+        });
+    };
+
+    const handleConfirmDelete = () => {
+        if (confirmation) {
+            const { id, name } = confirmation;
+            phonebook
+                .deleteOp(id)
+                .then(() => {
+                    setPersons((prevPersons) =>
+                        prevPersons.filter((contact) => contact.id !== id)
+                    );
+                    showMessage(`${name} was successfully deleted!`);
+                })
+                .catch((error) => {
+                    handleErrorResponse(error);
+                });
+
+            // Clear the confirmation
+            setConfirmation(null);
         }
     };
 
@@ -89,7 +107,7 @@ const Persons = ({ contacts, setPersons, showMessage, editContact }) => {
                                             <FontAwesomeIcon icon={faPen} size="xs" />
                                         </button>
                                         <button
-                                            onClick={() => handleDelete(contact.id)}
+                                            onClick={() => handleDelete(contact.id, contact.name)}
                                             className="delete-button"
                                         >
                                             <FontAwesomeIcon icon={faTrashAlt} size="xs" />
@@ -102,6 +120,19 @@ const Persons = ({ contacts, setPersons, showMessage, editContact }) => {
                     </>
                 )}
             </ul>
+            {confirmation && (
+                <div className="message">
+                    <p>{`Are you sure you want to delete contact ${confirmation.name}?`}</p>
+                    <div className="button-group">
+                    <button className="cancel-button" onClick={() => setConfirmation(null)}>
+                        Cancel
+                    </button>
+                    <button className="ok-button" onClick={handleConfirmDelete}>
+                        Confirm
+                    </button>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };
@@ -201,7 +232,7 @@ const FormAddNewContact = ({
                         <button className="cancel-button" onClick={handleCancel}>
                             <b>Cancel</b>
                         </button>
-                        <button className="save-button" type="submit">
+                        <button className="ok-button" type="submit">
                             <b>Save</b>
                         </button>
                     </div>
@@ -452,6 +483,7 @@ const App = () => {
                     setPersons={setPersons}
                     showMessage={showMessage}
                     editContact={editContact}
+                    handleErrorResponse={handleErrorResponse}
                 />
             </div>
             {showForm && (
