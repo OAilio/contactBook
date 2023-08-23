@@ -1,4 +1,6 @@
-# fsoPart3
-Palautusrepositorio Full Stack Open -kurssin 3. osaan
+# Contact Book
+This is my first full-stack project
 
-Linkki sovellukseen: https://phonebook-server-4geh.onrender.com/index.html
+Link: https://contactbook-51oi.onrender.com/
+
+Disclaimer: The layout is lacking responiveness, please view the app on a normal computer screen
