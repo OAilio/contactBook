@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "node backend/index.js",
     "frontend": "cd frontend && npm start",
     "dev": "nodemon backend/index.js",
     "lint": "eslint .",
