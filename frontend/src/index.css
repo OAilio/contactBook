@@ -1,3 +1,4 @@
+/* Fonts */
 @font-face {
 	font-family: 'Nunito Regular';
 	src: url('../../fonts/Nunito-VariableFont_wght.ttf') format('truetype');
@@ -12,6 +13,7 @@
   	font-style: normal;
 }
 
+/* Headings */
 h1 {
 	font-family: "Nunito Bold";
 	color: rgb(47,77,82);
@@ -33,6 +35,7 @@ h2 {
 	font-size: 51px;
 }
 
+/* Notification component styles */
 .message {
     font-family: "Nunito Bold";
     color: rgb(47, 77, 82);
@@ -40,7 +43,7 @@ h2 {
     border-style: solid;
     border-width: 2px;
     border-color: rgb(47, 77, 82);
-    font-size: 35px;
+    font-size: 30px;
     display: flex;
     flex-direction: column; /* Set flex direction to column */
     align-items: center;
@@ -59,14 +62,16 @@ h2 {
     margin-bottom: 0px; /* Add margin between message and button */
 }
 
+/* Body */
 body {
 	margin: 10px;
 	padding: 0;
 	background-color: rgb(255, 247, 114);
 	overflow: hidden;
-  }
+}
 
-  .form-container {
+/* Form styles */
+.form-container {
 	display: flex;
   	justify-content: center;
   	align-items: center;
@@ -94,33 +99,30 @@ body {
   	align-items: center;
 	text-align: center;
 	font-family: "Nunito Regular";
-	padding: 10px;
-	
+	padding: 10px;	
 }
 
-
-
-  .form-heading {
+.form-heading {
 	align-self: center;
 	font-family: "Nunito Bold";
 	font-size: 35px;
 	margin-bottom: 15px;
-  }
+}
 
-  .form-field-container {
-    position: relative;
-    margin-bottom: 20px; /* Add some space between field and message */
+.form-field-container {
+	position: relative;
+	margin-bottom: 20px; /* Add some space between field and message */
 }
   
-  .form-field label {
+.form-field label {
 	position: relative;
 	display: block;
 	font-size: 18px;
 	margin-bottom: 5px;
 	text-align: left;
-  }
+}
   
-  .form-field input {
+.form-field input {
 	width: 230px;
 	max-width: 300px; /* Adjust the max-width value as needed */
 	padding: 8px;
@@ -132,15 +134,15 @@ body {
 	color: rgb(47, 77, 82);
 	box-shadow: inset 0px 2px 4px rgba(0, 0, 0, 0.25);
 	caret-color: rgb(47, 77, 82);
-  }
+}
 
-  .form-field input::placeholder {
+.form-field input::placeholder {
 	font-size: 18px;
 	font-family: "Nunito Regular";
 	color: rgb(180, 180, 180)
-  }
+}
 
-  .validation-message {
+.validation-message {
 	position: absolute;
     bottom: -20px; /* Adjust this value to control the vertical spacing */
     left: 0;
@@ -148,14 +150,15 @@ body {
     color: red;
     font-size: 14px;
 	/* margin: 5px */
-  }
+}
   
-  .form-button-group {
+.form-button-group {
 	display: flex;
 	justify-content: center;
 	margin-top: 10px;
-  }
+}
 
+/* Button styles */
 .ok-button{
 	color: rgb(255, 247, 114);
 	background-color: rgb(47, 77, 82);
@@ -199,7 +202,7 @@ body {
 }
 
 
-  .new-button{
+.new-button{
 	background-color: rgb(47,77,82);
 	border: none;
 	padding-top: 1px;
@@ -214,16 +217,16 @@ body {
 	border-radius: 50%;
 	margin-right: 53px;
 	transition: background-color 0.3s ease, color 0.3s ease;
-  }
+}
 
-  .new-button:hover{
+.new-button:hover{
 	color:  rgb(47,77,82);
 	background-color: white;
 	box-shadow: 8px 8px 15px rgba(0, 0, 0, 0.25);
-  }
+}
 
 
-  .edit-button{
+.edit-button{
 	background-color: rgb(92, 214, 194);
 	border: none;
 	padding-left: 13px;
@@ -236,15 +239,15 @@ body {
 	font-family: "Nunito Bold";
 	border-radius: 50%;
 	transition: background-color 0.3s ease, color 0.3s ease;
-  }
+}
 
-  .edit-button:hover{
+.edit-button:hover{
 	color:  rgb(47,77,82);
 	background-color: rgb(255, 247, 114);
 	box-shadow: 8px 8px 15px rgba(0, 0, 0, 0.25);
-  }
+}
 
-  .delete-button{
+.delete-button{
 	background-color: rgb(92, 214, 194);
 	border: none;
 	padding-left: 15px;
@@ -258,16 +261,17 @@ body {
 	border-radius: 50%;
 	margin-left: 10px;
 	transition: background-color 0.3s ease, color 0.3s ease;
-  }
+}
 
-  .delete-button:hover{
+.delete-button:hover{
 	color:  white;
 	background-color: rgb(240, 86, 72);
 	box-shadow: 8px 8px 15px rgba(0, 0, 0, 0.25);
-  }
+}
 
-  .confirmation-dialog{
-	font-family: "Nunito Bold";
+
+.confirmation-dialog{
+	font-family: "Nunito Regular";
 	color: rgb(47, 77, 82);
 	background-color: white;
 	border-style: solid;
@@ -288,8 +292,8 @@ body {
 	box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.75);
 }
 
-  
-  .bar {
+/* The 'Your Contacts' bar */
+.bar {
 	display: inline-flex;
 	justify-content: center;
 	align-items: center;
@@ -297,13 +301,13 @@ body {
 	border-radius: 30px;
 	box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.25);
 	z-index: 2; /* Updated z-index value */
-  }
+}
 
-  .bar-container {
+.bar-container {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-  }
+}
 
 .search-bar{
 	background-color:rgb(255, 255, 255);
@@ -346,16 +350,9 @@ body {
 	z-index: 999;
 	overflow-y: auto;
 	background-color: transparent;
-  }
+}
   
-  /* .content {
-	position: relative;
-	z-index: 1;
-	text-align: center;
-	margin-bottom: 0;
-  	} */
-  
-  .dimmed-background {
+.dimmed-background {
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -363,9 +360,10 @@ body {
 	height: 100%;
 	background-color: rgba(0, 0, 0, 0.6);
 	z-index: 998;
-  }
+}
 
-  .contact-icons {
+/* Contact styles */
+.contact-icons {
 	display: flex;
 	align-items: left;
 	padding-top: 10px;
@@ -374,30 +372,30 @@ body {
 	position: sticky;
 	top: 0;
 	z-index: 1;
-  }
+}
   
-  .person-icon{
+.person-icon{
 	margin-left: 5px;
 	font-size: 28px;
 	margin-right: 227px;
 	color: rgb(92, 214, 194);
-  }
+}
 
-  .phone-icon{
+.phone-icon{
 	margin-left: 5px;
 	font-size: 28px;
 	margin-right: 76px;
 	color: rgb(92, 214, 194);
-  }
+}
 
-  .mail-icon{
+.mail-icon{
 	padding-top: 0px;
 	font-size: 31px;
 	margin-left: 5px;
 	color: rgb(92, 214, 194);
-  }
+}
 
-  .icon-text {
+.icon-text {
 	display: flex;
   	align-items: flex-end;
 	margin-left: 15px;
@@ -405,17 +403,17 @@ body {
 	font-size: 20px;
 	text-align: center;
 	color: white;
-  }
+}
 
-  .contacts-flexbox {
+.contacts-flexbox {
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	box-sizing: border-box;
 	z-index: 1;
-  }
+}
 
-  .contacts-list {
+.contacts-list {
 	list-style-type: none;
 	padding-top: 0px;
 	padding-left: 10px;
@@ -435,9 +433,7 @@ body {
 	height: 65vh; /* Adjust the value as per your requirements */
 	overflow-y: scroll;
 	scrollbar-width: thin; /* Set the width of the scrollbar */
-  }
-
-
+}
   
 .contacts-list::-webkit-scrollbar {
 	width: 20px; /* Set the width of the scrollbar */
@@ -456,7 +452,7 @@ body {
 	border-radius: 30px;
 }
   
-  .contact-item {
+.contact-item {
 	display: flex;
 	justify-content: left;
 	align-items: center;
@@ -472,22 +468,22 @@ body {
 	margin-bottom: 10px;
 	position: relative;
 	flex-wrap: wrap; /* Added flex-wrap property */
-  }
+}
   
-  .contact-item .button-group {
+.contact-item .button-group {
 	display: flex;
 	align-items: center;
 	margin-left: auto;
-  }
+}
 
-  .contact-name {
+.contact-name {
 	font-family: "Nunito Regular";
 	flex-basis: 330px;
 	font-size: 28px; /* Adjust the font size as desired */
 	flex-wrap: wrap; /* Added flex-wrap property */
-  }
+}
   
-  .contact-number{
+.contact-number{
 	font-family: "Nunito Regular";
 	flex-basis: 200px;
 	font-size: 21px; /* Adjust the font size as desired */
@@ -495,8 +491,9 @@ body {
 	flex-wrap: wrap; /* Added flex-wrap property */
 	color: white; /* Change this to your desired link color */
     text-decoration: none;
-  }
-  .contact-email{
+}
+
+.contact-email{
 	font-family: "Nunito Regular";
 	flex-basis: 200px;
 	font-size: 20px; /* Adjust the font size as desired */
@@ -504,9 +501,9 @@ body {
 	flex-wrap: wrap; /* Added flex-wrap property */
 	color: white; /* Change this to your desired link color */
     text-decoration: none;
-  }
+}
 
-  .contacts-list a.link-style {
+.contacts-list a.link-style {
     color: white;
     text-decoration: none;
 }
@@ -516,7 +513,7 @@ body {
     text-decoration: underline;
 }
 
-  .contact-not-found {
+.contact-not-found {
 	text-align: center;
 	padding: 10px;
 	font-family: "Nunito Regular";
@@ -525,4 +522,4 @@ body {
 	margin-top: 20px;
 	margin-bottom: 10px;
 	position: relative;
-  }
+}

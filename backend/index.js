@@ -1,38 +1,45 @@
-const { response } = require('express')
 const express = require('express')
 const morgan = require('morgan')
 const cors = require('cors')
 const Contact = require('./models/contact')
-const contact = require('./models/contact')
 require('dotenv').config()
-const app = express()
-app.use(express.json())
-app.use(express.static('build'))
-app.use(morgan('tiny'))
-app.use(cors())
 
+const app = express()
+
+// Middleware
+app.use(express.json()) // Parse JSON request bodies
+app.use(express.static('build')) // Serve static files
+app.use(morgan('tiny')) // Logger
+app.use(cors()) // Enable Cross-Origin Resource Sharing (CORS)
+
+// Route for the root URL
 app.get('/', (req, res) => {
 	res.send('<h1>Hello World!</h1>')
 })
 
+// Get all contacts
 app.get('/api/persons', (req, res, next) => {
-	Contact.find({}).then(contacts => {
-		res.json(contacts)
-	})
+	Contact.find({})
+		.then(contacts => {
+			res.json(contacts)
+		})
 		.catch(error => next(error))
 })
 
+// Get a specific contact by ID
 app.get('/api/persons/:id', (req, res, next) => {
-	Contact.findById(req.params.id).then(contact => {
-		if (contact){
-			res.json(contact)
-		} else {
-			res.status(404).end()
-		}
-	})
+	Contact.findById(req.params.id)
+		.then(contact => {
+			if (contact) {
+				res.json(contact)
+			} else {
+				res.status(404).end()
+			}
+		})
 		.catch(error => next(error))
 })
 
+// Update a contact by ID
 app.put('/api/persons/:id', (req, res, next) => {
 	const { name, number, email } = req.body
 
@@ -53,6 +60,7 @@ app.put('/api/persons/:id', (req, res, next) => {
 		.catch(error => next(error))
 })
 
+// Add a new contact
 app.post('/api/persons', (req, res, next) => {
 	const body = req.body
 
@@ -69,7 +77,7 @@ app.post('/api/persons', (req, res, next) => {
 		.catch(error => next(error))
 })
 
-
+// Delete a contact by ID
 app.delete('/api/persons/:id', (req, res, next) => {
 	Contact.findByIdAndRemove(req.params.id)
 		.then(result => {
@@ -78,6 +86,7 @@ app.delete('/api/persons/:id', (req, res, next) => {
 		.catch(error => next(error))
 })
 
+// Route to get info about the phonebook
 app.get('/info', (req, res, next) => {
 	Contact.countDocuments({})
 		.then(count => {
@@ -88,11 +97,13 @@ app.get('/info', (req, res, next) => {
 		.catch(error => next(error))
 })
 
+// Handle unknown endpoints
 const unknownEndpoint = (req, res) => {
 	res.status(404).send({ error: 'Unknown endpoint!' })
 }
 app.use(unknownEndpoint)
 
+// Error handling middleware
 const errorHandler = (error, req, res, next) => {
 	console.error(error.message)
 

@@ -2,12 +2,13 @@ const mongoose = require('mongoose')
 const validator = require('validator')
 require('dotenv').config()
 
+// Fetch MongoDB URI from environment variables
 const url = process.env.MONGODB_URI
 
+// Disable strict query for more flexibility
 mongoose.set('strictQuery', false)
 
-//console.log('MONGODB_URI:', process.env.MONGODB_URI)
-
+// Connect to MongoDB
 mongoose.connect(url)
 	.then(result => {
 		console.log('connected to MongoDB')
@@ -16,6 +17,7 @@ mongoose.connect(url)
 		console.log('error connecting to MongoDB:', error.message)
 	})
 
+// Define the contact schema
 const contactSchema = new mongoose.Schema({
 	name: {
 		type: String,
@@ -54,6 +56,7 @@ const contactSchema = new mongoose.Schema({
 	}
 })
 
+// Transform the document before converting to JSON
 contactSchema.set('toJSON', {
 	transform: (document, returnedObject) => {
 		returnedObject.id = returnedObject._id.toString()
@@ -62,4 +65,5 @@ contactSchema.set('toJSON', {
 	}
 })
 
+// Export the Contact model using the contact schema
 module.exports = mongoose.model('Contact', contactSchema)
