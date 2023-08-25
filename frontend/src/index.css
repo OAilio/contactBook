@@ -25,6 +25,15 @@ h1 {
 	text-align: center;
 }
 
+@media screen and (max-width: 768px) {
+	h1 {
+		font-size: 40px;
+		margin-right: 0;
+		margin-top: 5px;
+		margin-bottom: 10px;
+	}
+}
+
 h2 {
 	font-family: "Nunito Regular";
 	color: rgb(47,77,82);
@@ -33,6 +42,13 @@ h2 {
 	margin-top: 0px;
 	text-align: left;
 	font-size: 51px;
+}
+
+@media screen and (max-width: 768px) {
+	h2 {
+		font-size: 36px;
+		margin-left: 20px;
+	}
 }
 
 /* Notification component styles */
@@ -58,6 +74,7 @@ h2 {
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.75);
 }
 
+
 .message-content {
     margin-bottom: 0px; /* Add margin between message and button */
 }
@@ -68,6 +85,13 @@ body {
 	padding: 0;
 	background-color: rgb(255, 247, 114);
 	overflow: hidden;
+}
+
+@media screen and (max-width: 768px) {
+	body {
+		margin: 0;
+		padding: 0;
+	}
 }
 
 /* Form styles */
@@ -159,6 +183,7 @@ body {
 }
 
 /* Button styles */
+
 .ok-button{
 	color: rgb(255, 247, 114);
 	background-color: rgb(47, 77, 82);
@@ -223,6 +248,17 @@ body {
 	color:  rgb(47,77,82);
 	background-color: white;
 	box-shadow: 8px 8px 15px rgba(0, 0, 0, 0.25);
+}
+
+/* Media query for screens up to 768px wide */
+@media screen and (max-width: 768px) {
+	/* Adjust font size and margin for smaller screens */
+	.new-button {
+		font-size: 20px;
+		margin-right: 10px;
+		margin-left: 5px; 
+		padding: 8px 15px;
+	}
 }
 
 
@@ -300,13 +336,35 @@ body {
 	background-color: rgb(92, 214, 194);
 	border-radius: 30px;
 	box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.25);
-	z-index: 2; /* Updated z-index value */
+	z-index: 2;
+}
+
+@media screen and (max-width: 768px) {
+	.bar {
+		display: inline-flex;
+		justify-content: center;
+		align-items: center;
+		background-color: rgb(92, 214, 194);
+		border-top-left-radius: 10px;
+		border-top-right-radius: 10px;
+		border-bottom-left-radius: 0px;
+		border-bottom-right-radius: 0px;
+		box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.25);
+		z-index: 2;
+	}
 }
 
 .bar-container {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+}
+
+@media screen and (max-width: 768px) {
+	/* Adjust styles here for responsive design */
+	.bar-container {
+		flex-direction: column; /* Stack elements vertically */
+	}
 }
 
 .search-bar{
@@ -324,19 +382,43 @@ body {
 	caret-color: rgb(47, 77, 82);
 }
 
+@media screen and (max-width: 768px) {
+	.search-bar {
+		margin-left: auto; /* Align search bar to the right */
+		margin-right: auto;
+		padding-top: 9px;
+		padding-bottom: 6px;
+	}
+}
+
 .search-input {
 	color: rgb(47, 77, 82);
 	caret-color: rgb(47, 77, 82);
 	outline: none;
-	font-size: 24px;
+	font-size: 16px;
 	border: none;
 	width: 250px;
+}
+
+@media screen and (max-width: 768px) {
+	.search-input {
+		font-size: 16px;
+		width: 80%;
+	}
 }
 
 .search-icon {
 	color: rgb(203, 210, 212); 
     margin-right: 8px; /* Add some margin to separate the icon from the input */
     font-size: 24px; /* Adjust the size of the FontAwesome icon */
+}
+
+@media screen and (max-width: 768px) {
+	.search-icon {
+		color: rgb(203, 210, 212); 
+		margin-right: 8px; /* Add some margin to separate the icon from the input */
+		font-size: 10px; /* Adjust the size of the FontAwesome icon */
+	}
 }
 
 .search-input::placeholder{

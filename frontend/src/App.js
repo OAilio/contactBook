@@ -411,7 +411,7 @@ const App = () => {
         if (contact.name.length === 0) {
             nameMessage = 'Name is a mandatory field!'
         } else if (contact.name.length < 3) {
-            nameMessage = 'Name must be at least 3 characters long!';
+            nameMessage = 'Minimium length three (3) characters!';
         }
 
         if (contact.number.length === 0) {
