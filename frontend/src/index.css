@@ -29,8 +29,8 @@ h1 {
 	h1 {
 		font-size: 40px;
 		margin-right: 0;
-		margin-top: 5px;
-		margin-bottom: 10px;
+		margin-top: 3px;
+		margin-bottom: 3px;
 	}
 }
 
@@ -46,8 +46,8 @@ h2 {
 
 @media screen and (max-width: 768px) {
 	h2 {
-		font-size: 36px;
-		margin-left: 20px;
+		font-size: 24px;
+		margin-left: 10px;
 	}
 }
 
@@ -91,6 +91,7 @@ body {
 	body {
 		margin: 0;
 		padding: 0;
+		overflow: scroll;
 	}
 }
 
@@ -250,18 +251,6 @@ body {
 	box-shadow: 8px 8px 15px rgba(0, 0, 0, 0.25);
 }
 
-/* Media query for screens up to 768px wide */
-@media screen and (max-width: 768px) {
-	/* Adjust font size and margin for smaller screens */
-	.new-button {
-		font-size: 20px;
-		margin-right: 10px;
-		margin-left: 5px; 
-		padding: 8px 15px;
-	}
-}
-
-
 .edit-button{
 	background-color: rgb(92, 214, 194);
 	border: none;
@@ -303,6 +292,29 @@ body {
 	color:  white;
 	background-color: rgb(240, 86, 72);
 	box-shadow: 8px 8px 15px rgba(0, 0, 0, 0.25);
+}
+
+@media screen and (max-width: 768px) {
+	.new-button {
+		font-size: 18px;
+		margin-right: 10px;
+		margin-left: 5px; 
+		padding: 6px 13px;
+	}
+
+	.edit-button {
+		font-size: 12px;
+		margin-right: 0px;
+		margin-left: 5px; 
+		padding: 3px 7px;
+	}
+
+	.delete-button {
+		font-size: 12px;
+		margin-right: 0px;
+		margin-left: 3px; 
+		padding: 3px 8px;
+	}
 }
 
 
@@ -350,7 +362,10 @@ body {
 		border-bottom-left-radius: 0px;
 		border-bottom-right-radius: 0px;
 		box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.25);
-		z-index: 2;
+		z-index: 999;
+		width: 100%;
+		height: 50px;
+		/* position: fixed; */
 	}
 }
 
@@ -364,6 +379,7 @@ body {
 	/* Adjust styles here for responsive design */
 	.bar-container {
 		flex-direction: column; /* Stack elements vertically */
+		position: sticky;
 	}
 }
 
@@ -385,9 +401,11 @@ body {
 @media screen and (max-width: 768px) {
 	.search-bar {
 		margin-left: auto; /* Align search bar to the right */
-		margin-right: auto;
-		padding-top: 9px;
-		padding-bottom: 6px;
+		margin-right: 5px;
+		padding-top: 1px;
+		padding-bottom: 1px;
+		padding-left: 10px;
+		width: calc(30vw);
 	}
 }
 
@@ -403,7 +421,7 @@ body {
 @media screen and (max-width: 768px) {
 	.search-input {
 		font-size: 16px;
-		width: 80%;
+		width: calc(20vw);
 	}
 }
 
@@ -416,8 +434,8 @@ body {
 @media screen and (max-width: 768px) {
 	.search-icon {
 		color: rgb(203, 210, 212); 
-		margin-right: 8px; /* Add some margin to separate the icon from the input */
-		font-size: 10px; /* Adjust the size of the FontAwesome icon */
+		margin-right: 3px; /* Add some margin to separate the icon from the input */
+		font-size: 15px; /* Adjust the size of the FontAwesome icon */
 	}
 }
 
@@ -487,6 +505,40 @@ body {
 	color: white;
 }
 
+@media screen and (max-width: 768px) {
+	.person-icon{
+		margin-left: 5px;
+		font-size: 14px;
+		margin-right: 40px;
+		color: rgb(92, 214, 194);
+	}
+
+	.phone-icon{
+		margin-left: 5px;
+		font-size: 14px;
+		margin-right: 30px;
+		color: rgb(92, 214, 194);
+	}
+
+	.mail-icon{
+		padding-top: 0px;
+		font-size: 15px;
+		margin-left: 5px;
+		color: rgb(92, 214, 194);
+	}
+
+	.icon-text {
+		display: flex;
+		align-items: flex-end;
+		margin-left: 15px;
+		font-family: "Nunito Bold";
+		font-size: 10px;
+		text-align: center;
+		color: white;
+		margin-left: 12px;
+	}
+}
+
 .contacts-flexbox {
 	display: flex;
 	justify-content: center;
@@ -516,6 +568,19 @@ body {
 	overflow-y: scroll;
 	scrollbar-width: thin; /* Set the width of the scrollbar */
 }
+
+@media screen and (max-width: 768px) {
+	.contacts-list {
+		width: 100%;
+		height: auto;
+		max-height: none;
+		overflow-y: auto;
+		position: relative;
+		scrollbar-width: none;
+		-webkit-overflow-scrolling: touch;
+		border-radius: 0%;
+	}
+}
   
 .contacts-list::-webkit-scrollbar {
 	width: 20px; /* Set the width of the scrollbar */
@@ -532,6 +597,20 @@ body {
 	margin-top: 5px;
 	margin-bottom: 30px;
 	border-radius: 30px;
+}
+
+/* Hide the scrollbar on mobile devices */
+@media screen and (max-width: 768px) {
+    .contacts-list::-webkit-scrollbar {
+        width: 0; /* Hide the scrollbar width */
+        background-color: transparent; /* Hide the scrollbar track */
+    }
+    .contacts-list::-webkit-scrollbar-thumb {
+        background-color: transparent; /* Hide the scrollbar thumb */
+    }
+    .contacts-list::-webkit-scrollbar-track {
+        background-color: transparent; /* Hide the scrollbar track */
+    }
 }
   
 .contact-item {
@@ -550,6 +629,26 @@ body {
 	margin-bottom: 10px;
 	position: relative;
 	flex-wrap: wrap; /* Added flex-wrap property */
+}
+
+@media screen and (max-width: 768px) {
+    .contact-item {
+		display: flex;
+		justify-content: left;
+		align-items: center;
+		padding: 10px;
+		color: white;
+		font-size: 32px;
+		background-color: rgb(47, 77, 82);
+		border-color: rgb(92, 214, 194);
+		border-style: solid;
+		border-radius: 20px;
+		border-width: 2px;
+		margin-top: 5px;
+		margin-bottom: 5px;
+		position: relative;
+		flex-wrap: wrap; /* Added flex-wrap property */
+	}
 }
   
 .contact-item .button-group {
@@ -583,6 +682,41 @@ body {
 	flex-wrap: wrap; /* Added flex-wrap property */
 	color: white; /* Change this to your desired link color */
     text-decoration: none;
+}
+
+@media screen and (max-width: 768px) {
+    .contact-name {
+		font-family: "Nunito Regular";
+		flex-basis: 100px;
+		font-size: 12px; /* Adjust the font size as desired */
+		flex-wrap: wrap; /* Added flex-wrap property */
+	}
+
+	.contact-number{
+		font-family: "Nunito Regular";
+		flex-basis: 100px;
+		font-size: 11px; /* Adjust the font size as desired */
+		text-align: left;
+		flex-wrap: wrap; /* Added flex-wrap property */
+		color: white; /* Change this to your desired link color */
+		text-decoration: none;
+	}
+
+	.contact-email{
+		font-family: "Nunito Regular";
+		flex-basis: 100px;
+		font-size: 10px; /* Adjust the font size as desired */
+		text-align: left;
+		flex-wrap: wrap; /* Added flex-wrap property */
+		color: white; /* Change this to your desired link color */
+		text-decoration: none;
+	}
+
+	.contact-item .button-group {
+		display: flex;
+		align-items: center;
+		margin-left: auto;
+	}
 }
 
 .contacts-list a.link-style {
