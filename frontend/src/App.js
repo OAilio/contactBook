@@ -335,11 +335,23 @@ const FormAddNewContact = ({
 // AboutMe component for the "About Me" page
 const AboutMe = () => {
     return (
-        <div>
+        <div className="about-me-container">
             <h2>About Me</h2>
             <p>
-                Hello! I am Myself, and this is a brief description of who I am and what I do.
+                Hello! You've stumbled upon my first full-stack creation! My name is Okko Ailio and 
+                I'm a 3rd year computer science student in the University of Turku. 
             </p>
+            <p>
+                I am extensively interested in various study opportunities in the technical field, 
+                such as UX/UI design, AI, and data analytics. My goal is to gain diverse work experience 
+                in a field similar to my education, already during my studies.
+            </p>
+            <p>
+                If You like what you see and would like to hear more from me, do not hesitate to contact me!
+            </p>
+            <button class="ok-button">
+                <a href="https://www.linkedin.com/in/okkoailio/">Check out my LinkedIn</a>
+            </button>
         </div>
     );
 };
