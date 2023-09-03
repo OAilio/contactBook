@@ -16,13 +16,12 @@
 /* Headings */
 h1 {
 	font-family: "Nunito Bold";
-	color: rgb(47,77,82);
+	color: rgb(47, 77, 82);
 	text-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
-	font-size: 78px;
+	font-size: 70px;
 	margin-bottom: 0px;
 	margin-top: 0px;
-	margin-right: 386px;
-	text-align: center;
+	margin-right: 140px;
 }
 
 @media screen and (max-width: 768px) {
@@ -49,6 +48,38 @@ h2 {
 		font-size: 24px;
 		margin-left: 10px;
 	}
+}
+
+.header-container {
+    display: flex;
+    align-items: center;
+	text-align: center;
+	justify-content: center;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    display: flex; /* Display the list items as a flex container */
+    gap: 30px; /* Adjust the gap between links as needed */
+}
+
+nav li {
+    font-size: 32px; /* Adjust the font size as needed */
+    margin-left: 10px; /* Adjust the margin between list items as needed */
+	text-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
+}
+
+/* Style for the links themselves */
+nav a {
+    font-family: "Nunito Bold";
+    color: rgb(47, 77, 82); /* Adjust link color as needed */
+    transition: color 0.3s;
+	text-decoration: none;
+}
+
+nav a:hover {
+    color: rgb(92, 214, 194); /* Adjust link hover color as needed */
 }
 
 /* Notification component styles */
@@ -81,7 +112,7 @@ h2 {
 
 /* Body */
 body {
-	margin: 10px;
+	margin: 0px;
 	padding: 0;
 	background-color: rgb(255, 247, 114);
 	overflow: hidden;

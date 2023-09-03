@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import phonebook from './comms/phonebook'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faSearch, faPlus, faPen, faTrashAlt, faCircleUser, faPhone, faEnvelope } from '@fortawesome/free-solid-svg-icons';
@@ -331,6 +332,18 @@ const FormAddNewContact = ({
     );
 };
 
+// AboutMe component for the "About Me" page
+const AboutMe = () => {
+    return (
+        <div>
+            <h2>About Me</h2>
+            <p>
+                Hello! I am Myself, and this is a brief description of who I am and what I do.
+            </p>
+        </div>
+    );
+};
+
 const App = () => {
     // State variables
     const [persons, setPersons] = useState([]);
@@ -579,70 +592,101 @@ const App = () => {
 
     // Filter the persons based on search input
     const filteredPersons = persons.filter(person => person.name.toLowerCase().includes(searchInput.toLowerCase()));
-
-    return (
-        <>
-            {/* Page Header */}
-            <h1>CONTACT BOOK</h1>
     
-            {/* Search Bar and New Contact Button */}
-            <div className="bar-container">
-                <div className="bar">
-                    <h2>Your contacts</h2>
-                    {/* Search Filter Component */}
-                    <SearchFilter handleSearchChange={handleSearchChange} searchInput={searchInput}/>
-                    {/* Button to Add New Contact */}
-                    <button onClick={handleNewContactClick} className="new-button">
-                        <FontAwesomeIcon icon={faPlus} size="xs" />
-                    </button>
+    const Home = () => {
+        return (
+            <>
+        
+                {/* Search Bar and New Contact Button */}
+                <div className="bar-container">
+                    <div className="bar">
+                        <h2>Your contacts</h2>
+                        {/* Search Filter Component */}
+                        <SearchFilter handleSearchChange={handleSearchChange} searchInput={searchInput}/>
+                        {/* Button to Add New Contact */}
+                        <button onClick={handleNewContactClick} className="new-button">
+                            <FontAwesomeIcon icon={faPlus} size="xs" />
+                        </button>
+                    </div>
                 </div>
-            </div>
-    
-            {/* Contact List */}
-            <div className="content">
-                {/* Render the Persons Component */}
-                <Persons
-                    contacts={filteredPersons}
-                    setPersons={setPersons}
-                    showMessage={showMessage}
-                    editContact={editContact}
-                    handleErrorResponse={handleErrorResponse}
-                />
-            </div>
-    
-            {/* New Contact Form */}
-            {showForm && (
-                <div className={`container ${showForm ? 'dimmed-background' : ''}`}>
-                    {/* Render the FormAddNewContact Component */}
-                    <FormAddNewContact
-                        addContact={addContact}
-                        selectedContact={selectedContact}
-                        newName={newName}
-                        handleNameChange={handleNameChange}
-                        newNumber={newNumber}
-                        handleNumberChange={handleNumberChange}
-                        newEmail={newEmail}
-                        handleEmailChange={handleEmailChange}
-                        showForm={showForm}
-                        setShowForm={setShowForm}
-                        task={selectedContact ? 'edit' : 'add'}
-                        clearFields={clearFields}
-                        clearErrorMessages={clearErrorMessages}
-                        saveEditedContact={saveEditedContact}
-                        nameValidationMessage={nameValidationMessage}
-                        numberValidationMessage={numberValidationMessage}
-                        emailValidationMessage={emailValidationMessage}
+        
+                {/* Contact List */}
+                <div className="content">
+                    {/* Render the Persons Component */}
+                    <Persons
+                        contacts={filteredPersons}
+                        setPersons={setPersons}
+                        showMessage={showMessage}
+                        editContact={editContact}
+                        handleErrorResponse={handleErrorResponse}
                     />
                 </div>
-            )}
-    
-            {/* Notification Component */}
-            <Notification 
-                message={message}
-                setMessage={setMessage}
-            />
-        </>
+        
+                {/* New Contact Form */}
+                {showForm && (
+                    <div className={`container ${showForm ? 'dimmed-background' : ''}`}>
+                        {/* Render the FormAddNewContact Component */}
+                        <FormAddNewContact
+                            addContact={addContact}
+                            selectedContact={selectedContact}
+                            newName={newName}
+                            handleNameChange={handleNameChange}
+                            newNumber={newNumber}
+                            handleNumberChange={handleNumberChange}
+                            newEmail={newEmail}
+                            handleEmailChange={handleEmailChange}
+                            showForm={showForm}
+                            setShowForm={setShowForm}
+                            task={selectedContact ? 'edit' : 'add'}
+                            clearFields={clearFields}
+                            clearErrorMessages={clearErrorMessages}
+                            saveEditedContact={saveEditedContact}
+                            nameValidationMessage={nameValidationMessage}
+                            numberValidationMessage={numberValidationMessage}
+                            emailValidationMessage={emailValidationMessage}
+                        />
+                    </div>
+                )}
+        
+                {/* Notification Component */}
+                <Notification 
+                    message={message}
+                    setMessage={setMessage}
+                />
+            </>
+        );
+    };
+
+    return (
+        <Router>
+            <div>
+                {/* Container for Header and Navigation */}
+                <div className="header-container">
+                    {/* Page Header */}
+                    <h1>CONTACT BOOK</h1>
+                    {/* Navigation Links */}
+                    <nav>
+                        <ul>
+                            <li>
+                                <Link to="/">Home</Link>
+                            </li>
+                            <li>
+                                <Link to="/about">About Me</Link>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+
+                {/* Define Routes */}
+                <Routes>
+                    <Route path="/about" element={<AboutMe />} />
+                    <Route path="/" element={<Home />} />
+                </Routes>
+            </div>
+        </Router>
     );
 };
+
+
 
 export default App;
