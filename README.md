@@ -1,4 +1,6 @@
 # Contact Book
+### NB! There is currently a problem with the input fields that needs to be fixed
+
 Welcome to the Github repo of my first full-stack-project! This is a simple contact management application built as a Single Page Application (SPA) using React on the frontend and Node.js with Express on the backend. The application allows users to manage their contacts by adding, editing, and deleting them. The frontend communicates with the backend RESTful API to perform these operations. The app is hosted by Render.
 
 Link to the app: https://contactbook-51oi.onrender.com/
