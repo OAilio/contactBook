@@ -28,6 +28,8 @@ The backend is implemented using Node.js and Express, connecting to a MongoDB da
 * **SearchFilter:** Provides a search bar to filter contacts by name.
 * **Persons:** Displays the list of contacts and handles editing and deletion.
 * **FormAddNewContact:** Manages the form for adding and editing contacts.
+* **Home**: Represents the main content of the application and is responsible for rendering various subcomponents, managing state, and handling user interactions.
+* **AboutMe**: "About Me" page of the application.
 * **App:** The main component that orchestrates the app's functionality.
 
 **Disclaimer:** As this is my first full-stack application, the layout is lacking some responsiveness on smaller devices. Improving the responsiveness is on the to-do list. 
