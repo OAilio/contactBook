@@ -332,6 +332,103 @@ const FormAddNewContact = ({
     );
 };
 
+const Home = ({
+    persons,
+    filteredPersons,
+    setPersons,
+    newName,
+    setNewName,
+    newNumber,
+    setNewNumber,
+    newEmail,
+    setNewEmail,
+    searchInput,
+    setSearchInput,
+    message,
+    setMessage,
+    showMessage,
+    showForm,
+    setShowForm,
+    selectedContact,
+    setSelectedContact,
+    nameValidationMessage,
+    numberValidationMessage,
+    emailValidationMessage,
+    addContact,
+    editContact,
+    saveEditedContact,
+    clearFields,
+    clearErrorMessages,
+    handleErrorResponse,
+    handleSearchChange,
+    handleNewContactClick,
+    handleNameChange,
+    handleNumberChange,
+    handleEmailChange
+  }) => {
+    return (
+        <>
+    
+            {/* Search Bar and New Contact Button */}
+            <div className="bar-container">
+                <div className="bar">
+                    <h2>Your contacts</h2>
+                    {/* Search Filter Component */}
+                    <SearchFilter handleSearchChange={handleSearchChange} searchInput={searchInput}/>
+                    {/* Button to Add New Contact */}
+                    <button onClick={handleNewContactClick} className="new-button">
+                        <FontAwesomeIcon icon={faPlus} size="xs" />
+                    </button>
+                </div>
+            </div>
+    
+            {/* Contact List */}
+            <div className="content">
+                {/* Render the Persons Component */}
+                <Persons
+                    contacts={filteredPersons}
+                    setPersons={setPersons}
+                    showMessage={showMessage}
+                    editContact={editContact}
+                    handleErrorResponse={handleErrorResponse}
+                />
+            </div>
+    
+            {/* New Contact Form */}
+            {showForm && (
+                <div className={`container ${showForm ? 'dimmed-background' : ''}`}>
+                    {/* Render the FormAddNewContact Component */}
+                    <FormAddNewContact
+                        addContact={addContact}
+                        selectedContact={selectedContact}
+                        newName={newName}
+                        handleNameChange={handleNameChange}
+                        newNumber={newNumber}
+                        handleNumberChange={handleNumberChange}
+                        newEmail={newEmail}
+                        handleEmailChange={handleEmailChange}
+                        showForm={showForm}
+                        setShowForm={setShowForm}
+                        task={selectedContact ? 'edit' : 'add'}
+                        clearFields={clearFields}
+                        clearErrorMessages={clearErrorMessages}
+                        saveEditedContact={saveEditedContact}
+                        nameValidationMessage={nameValidationMessage}
+                        numberValidationMessage={numberValidationMessage}
+                        emailValidationMessage={emailValidationMessage}
+                    />
+                </div>
+            )}
+    
+            {/* Notification Component */}
+            <Notification 
+                message={message}
+                setMessage={setMessage}
+            />
+        </>
+    );
+};
+
 // AboutMe component for the "About Me" page
 const AboutMe = () => {
     return (
@@ -470,7 +567,6 @@ const App = () => {
     // Function to save an edited contact
     const saveEditedContact = (event) => {
 		event.preventDefault();
-	
 		// Create an updated contact object with the edited values
         const updatedContact = {
             ...selectedContact,
@@ -547,6 +643,7 @@ const App = () => {
 
     // Handles changes in the name input field
     const handleNameChange = (event) => {
+        console.log("Field changed")
 		event.preventDefault();
 		console.log(event.target.value);
 		
@@ -604,70 +701,6 @@ const App = () => {
 
     // Filter the persons based on search input
     const filteredPersons = persons.filter(person => person.name.toLowerCase().includes(searchInput.toLowerCase()));
-    
-    const Home = () => {
-        return (
-            <>
-        
-                {/* Search Bar and New Contact Button */}
-                <div className="bar-container">
-                    <div className="bar">
-                        <h2>Your contacts</h2>
-                        {/* Search Filter Component */}
-                        <SearchFilter handleSearchChange={handleSearchChange} searchInput={searchInput}/>
-                        {/* Button to Add New Contact */}
-                        <button onClick={handleNewContactClick} className="new-button">
-                            <FontAwesomeIcon icon={faPlus} size="xs" />
-                        </button>
-                    </div>
-                </div>
-        
-                {/* Contact List */}
-                <div className="content">
-                    {/* Render the Persons Component */}
-                    <Persons
-                        contacts={filteredPersons}
-                        setPersons={setPersons}
-                        showMessage={showMessage}
-                        editContact={editContact}
-                        handleErrorResponse={handleErrorResponse}
-                    />
-                </div>
-        
-                {/* New Contact Form */}
-                {showForm && (
-                    <div className={`container ${showForm ? 'dimmed-background' : ''}`}>
-                        {/* Render the FormAddNewContact Component */}
-                        <FormAddNewContact
-                            addContact={addContact}
-                            selectedContact={selectedContact}
-                            newName={newName}
-                            handleNameChange={handleNameChange}
-                            newNumber={newNumber}
-                            handleNumberChange={handleNumberChange}
-                            newEmail={newEmail}
-                            handleEmailChange={handleEmailChange}
-                            showForm={showForm}
-                            setShowForm={setShowForm}
-                            task={selectedContact ? 'edit' : 'add'}
-                            clearFields={clearFields}
-                            clearErrorMessages={clearErrorMessages}
-                            saveEditedContact={saveEditedContact}
-                            nameValidationMessage={nameValidationMessage}
-                            numberValidationMessage={numberValidationMessage}
-                            emailValidationMessage={emailValidationMessage}
-                        />
-                    </div>
-                )}
-        
-                {/* Notification Component */}
-                <Notification 
-                    message={message}
-                    setMessage={setMessage}
-                />
-            </>
-        );
-    };
 
     return (
         <Router>
@@ -692,7 +725,40 @@ const App = () => {
                 {/* Define Routes */}
                 <Routes>
                     <Route path="/about" element={<AboutMe />} />
-                    <Route path="/" element={<Home />} />
+                    <Route path="/" element={<Home
+                        persons={persons}
+                        filteredPersons={filteredPersons}
+                        setPersons={setPersons}
+                        newName={newName}
+                        setNewName={setNewName}
+                        newNumber={newNumber}
+                        setNewNumber={setNewNumber}
+                        newEmail={newEmail}
+                        setNewEmail={setNewEmail}
+                        searchInput={searchInput}
+                        setSearchInput={setSearchInput}
+                        message={message}
+                        setMessage={setMessage}
+                        showMessage={showMessage}
+                        showForm={showForm}
+                        setShowForm={setShowForm}
+                        selectedContact={selectedContact}
+                        setSelectedContact={setSelectedContact}
+                        nameValidationMessage={nameValidationMessage}
+                        numberValidationMessage={numberValidationMessage}
+                        emailValidationMessage={emailValidationMessage}
+                        addContact={addContact}
+                        editContact={editContact}
+                        saveEditedContact={saveEditedContact}
+                        clearFields={clearFields}
+                        clearErrorMessages={clearErrorMessages}
+                        handleErrorResponse={handleErrorResponse}
+                        handleSearchChange={handleSearchChange}
+                        handleNewContactClick={handleNewContactClick}
+                        handleNameChange={handleNameChange}
+                        handleNumberChange={handleNumberChange}
+                        handleEmailChange={handleEmailChange}
+                        />} />
                 </Routes>
             </div>
         </Router>

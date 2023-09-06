@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/static/css/main.762cf454.css",
-    "main.js": "/static/js/main.c2710bab.js",
+    "main.js": "/static/js/main.7e27adb3.js",
     "static/media/Nunito-VariableFont_wght.ttf": "/static/media/Nunito-VariableFont_wght.4a3eef3e0a61b7eb3eda.ttf",
     "index.html": "/index.html",
     "main.762cf454.css.map": "/static/css/main.762cf454.css.map",
-    "main.c2710bab.js.map": "/static/js/main.c2710bab.js.map"
+    "main.7e27adb3.js.map": "/static/js/main.7e27adb3.js.map"
   },
   "entrypoints": [
     "static/css/main.762cf454.css",
-    "static/js/main.c2710bab.js"
+    "static/js/main.7e27adb3.js"
   ]
 }
